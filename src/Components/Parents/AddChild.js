@@ -4,9 +4,6 @@ import { db, auth } from "../../firebase";
 import { doc, setDoc, collection } from "firebase/firestore"; 
 import { Button } from 'react-bootstrap';
 
-import "../Css/AddChild.css"
-
-
 function AddChild() {
 
     const [email, setEmail] = useState("");
@@ -22,26 +19,16 @@ function AddChild() {
         });
       };
   return (
-    <div className="add-kid">
-        <h1 className="headline">Let's begin with a simple journey of managing your child's pocket money!</h1>
-        <h4 className="enter-details">Enter Details</h4>
-        <div className='inputBox'>
-        <h6 className="label">NAME</h6>
-        <input className="input-field" onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Full Name" />
-        <h6 className="label">EMAIL</h6>
-        <input className="input-field" onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
-        <Button 
-        className="submit-btn"
-        onClick={addChildToDB}>
+    <div>
+        <h1>Let's begin with a simple journey of managing your child's pocket money!</h1>
+        <h4>Enter Details</h4>
+        <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" />
+        <input onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
+        <Button onClick={addChildToDB}>
             Submit
         </Button>
-        </div>
     </div>
   )
 }
 
 export default AddChild
-
-        
-      
-   

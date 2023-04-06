@@ -2,7 +2,7 @@ import React,{ useState, useEffect, useContext} from 'react';
 import {Button, Container, Navbar, Modal} from 'react-bootstrap';
 //you need to also add bootstrap link in the ap.js page or here
 //modal sis the cart popup
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from '../CartContext.js';
 import CartProduct from './CartProduct.js';
 import { auth } from '../firebase.js';
@@ -78,8 +78,8 @@ function NavBar() {
             
             <div class="nav-links">
                 <ul>
-                    <li><a href="#" className=" links expenditure" target="_blank">Expenditure</a></li>
-                    <li><a href="#" className="links transactions"target="_blank">Transactions</a></li>
+                    <li><Link className="links" to="/transactions">Transactions</Link></li>
+                    <li><Link className="links" to="/restrictions">Restrictions</Link></li>
                 </ul>
                 
             </div>
