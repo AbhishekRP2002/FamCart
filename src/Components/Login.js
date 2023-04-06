@@ -22,6 +22,8 @@ function Login() {
     const [username, setUsername] = useState("");
 
     const [isSignup, setIsSignup] = useState(false);
+    const [isSigningIn, setIsSigningIn] = useState(false);
+
 
     const handleParent = () => {
         setParent(true);
@@ -53,6 +55,7 @@ function Login() {
 }
 
   const signIn = () => {
+    setIsSigningIn(true)
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const uid = userCredential.user.uid;
@@ -63,6 +66,7 @@ function Login() {
       })
       .catch((error) => {
         alert(error.message);
+        setIsSigningIn(false)
       });
   };
 
@@ -177,7 +181,11 @@ return false;
             <label className="label">PASSWORD</label>
             <input className="input" onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" autocomplete="off" />
             <br />
-            <button onClick={signIn} className="signInBtn">SIGN IN</button>
+            {isSigningIn
+              ?<button onClick={signIn} className="signInBtn">SIGNING IN</button>
+              :<button onClick={signIn} className="signInBtn">SIGN IN</button>
+            }
+            
           </div>
            <div className="toggle">
                 Don't have an account?
