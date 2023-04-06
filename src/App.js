@@ -34,7 +34,9 @@ function App() {
         <Route path="/parent" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
         <Route path="/child" element={<><Navbar /><ChildHome /></>}/>
+
         <Route path="/" element={<><Navbar/><Home/></>}/>
+        
         </Switch>
       </div>
     </Router>

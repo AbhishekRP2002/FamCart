@@ -9,8 +9,8 @@ import { auth } from '../firebase.js';
 import { doc, getDoc,getDocs,collection,where,query} from "firebase/firestore"; 
 import { db } from '../firebase.js';
 import "./Css/Navbar.css"
-import Profile from "./Css/Images/profile.jpg"
-import Logo from "./Css/Images/logo.jpg"
+import Profile from "./Css/Images/profile.png"
+import Logo from "./Css/Images/logo.png"
 
 function NavBar() {
 

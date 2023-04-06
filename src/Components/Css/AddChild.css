@@ -1,0 +1,94 @@
+*, :before, :after {
+    margin: 0;
+    padding: 0;
+}
+
+.add-kid {
+   margin: auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+   width: 100vw;
+
+    color: #144273;
+}
+
+.headline{
+    margin-top:10rem;
+  
+    margin-bottom:0.5rem;
+    width: 70%;
+    margin: 3rem;
+    
+}
+
+.enter-details{
+
+    margin-top:2rem;
+    
+    font-family: 'Roboto';
+    
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+}
+
+.inputBox {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label {
+    
+    margin-top:1rem;
+    margin-left:0.1rem;
+   
+    font-family: 'Roboto';
+
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.input-field {
+    box-sizing: border-box;
+    border: 1px solid #F0F1F7;
+    border-radius: 8px;
+
+    margin-top:2rem;
+    margin-bottom:2rem;
+
+    font-family: 'Roboto';
+    font-size:30px;
+    width:100%;
+}
+
+.submit-btn {
+    width:450px;
+    padding-left:10rem;
+    
+    text-align: center;
+    font-family: 'Roboto';
+
+font-weight: 400;
+font-size: 24px;
+display: flex;
+align-items: center;
+text-transform: uppercase;
+
+color: #FFFFFF;
+background: #144273;
+border-radius: 15px;
+
+}
