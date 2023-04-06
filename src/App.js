@@ -12,6 +12,7 @@ import './App.css';
 import ParentHome from './Components/Parents/ParentHome.js';
 import ChildHome from './Components/Child/ChildHome.js';
 import AddChild from './Components/Parents/AddChild.js';
+import Transactions from './Components/Transactions.js';
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login" element={<Login />}/>
         <Route path="/success" element={<><Navbar/><Success/></>}/>
         <Route path="/cancel" element={<><Navbar/><Cancel/></>}/>
+        <Route path="/transactions" element={<><Navbar/><Transactions/></>}/>
         <Route path="/parent" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
         <Route path="/child" element={<><Navbar /><ChildHome /></>}/>

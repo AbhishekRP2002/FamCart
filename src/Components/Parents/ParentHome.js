@@ -5,7 +5,7 @@ import { db, auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import Add from "../Css/Images/Add.png";
 import {Row, Col} from 'react-bootstrap';
-
+import "../Css/ParentHome.css"
 
 function ParentHome() {
 
@@ -112,13 +112,13 @@ const closeChildBalance = () => {
     }, []);
   return (
     <>
-    <div>
+    <div className='parentHome'>
       <Row>
         <Col>
           <h1>Good Morning, User</h1>
           {children?.map((child) => (
-                <Col>
-                <Button onClick={() => {
+                <Col sm={12}>
+                <Button className='childDetails' onClick={() => {
                   openChildDetails(child.child_email)
                   setMail(child.child_email)
                   lastTransactionDate(child.child_email)
@@ -128,31 +128,33 @@ const closeChildBalance = () => {
                     ritems = [];
                     setRitemIDs([])
                     setRItems([])
-                    setTimeout(showChildBalance, 300);
+                    setTimeout(showChildBalance, 500);
                   }
                   else if(child.child_email===mail)
                   {
                     ritems = [];
                     setRitemIDs([])
                     setRItems([])
-                    setTimeout(closeChildBalance, 300);
+                    setTimeout(closeChildBalance, 500);
                   }
                   else{
                     ritems = [];
-                    console.log("heere")
                     setRitemIDs([])
-                    setTimeout(showChildBalance, 300);
+                    setTimeout(showChildBalance, 500);
                   }
                   }}>
-                  <h1>{child.child_username}</h1>
-                  <h1>{child.child_email}</h1>
+                  <h1 className='name'>{child.child_username}</h1>
+                  <h3 className='email'>{child.child_email}</h3>
                   </Button>
                   {
                   ((showChild===true)&&(child.child_email===mail))&&
-                  <><h2>Balance={money}</h2>
+                  < div className='moreInfo'><span>Balance:</span>
+                  <span>
+                  {money}
+                  </span>
                   <h2>Last Date Of Transaction={date.toString()}</h2>
-                  <h2>Restricted={ritems?.map((item,idx) => (
-                      <span key={idx}>{item},</span>
+                  <h2>Restricted items: {ritems?.map((item,idx) => (
+                      <span key={idx}>{item} </span>
                   ))}</h2>
                   <Button onClick={()=>{
                       setShowAmt(true)
@@ -163,13 +165,13 @@ const closeChildBalance = () => {
                       <Button>Pay</Button>
                   </>
                   }
-                  </>
+                  </div>
                   }
               </Col>
           ))}
         </Col>
 
-        <Col className='addChild'>
+        <Col sm={6} className='addChild'>
         <h1>Add Child </h1>
         <Link to='/addchild'>
           <img className= 'add' src={Add} />
