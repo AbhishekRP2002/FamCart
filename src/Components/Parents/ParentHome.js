@@ -1,64 +1,181 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Button, Container, Navbar, Modal} from 'react-bootstrap';
 import { doc, setDoc, collection, query, where, getDocs,getDoc } from "firebase/firestore";
-import { CartContext } from '../../CartContext.js';
 import { db, auth } from "../../firebase";
+import { useNavigate, Link } from "react-router-dom";
+import Add from "../Css/Images/Add.png";
+import {Row, Col} from 'react-bootstrap';
+
 
 function ParentHome() {
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+const [children, setChildren] = useState([]);
+const [mail, setMail] = useState("");
+const [money, setMoney] = useState(0);
+const [date, setDate] = useState([]);
+var [ritems, setRItems] = useState([]);
+const [amtToPay, setAmtToPay] = useState(0);
 
-  const [showChild,setShowChild]=useState(false);
-  const [showResponse,setShowResponse]=useState(false);
+var [ritemIDs, setRitemIDs] = useState([]);
+const [showChild,setShowChild] = useState(false);
+const [showAmt, setShowAmt] = useState(false);
+let navigate = useNavigate();
 
-  const createChild = () => setShowChild(true);
-  const handleClose = () => {
-    setShowChild(false);
-    setShowResponse(false);
-  }
+const openChildDetails = async (email) => {
+  setShowChild(false)
+  ritems = [];
+  const qu = query(collection(db, "children"), where ("email", "==",email));
+  const querySnap = await getDocs(qu);
+
+    if (!querySnap.empty) {
+      const doc = querySnap.docs[0];
+      const data = doc.data();
+      setMoney(data.balance)
+    } else {
+      console.log('Nopee');
+    }
+}
+
+const lastTransactionDate = async (email) => {
+  setShowChild(false)
+  const docRef = doc(db, "transactions", email);
+  const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const dateData = docSnap.data().date.toDate();
+      setDate(dateData);
+    } else {
+      console.log('No matching documents.');
+    }
+}
+
+const getProductNames = async(ID) => {
+  var x = ID.toString();
+    var docu = doc(db, "products", x);
+    const docuSnap = await getDoc(docu);
   
-  const addChildToDB = async () => {
-    const id = auth.currentUser.uid;
-    await setDoc(doc(db, "link", email), {
-      parent_id: id,
-      child_username: username,
-      child_email: email,
-    });
-    setShowChild(false);
-    setShowResponse(true);
-  };
+      if (docuSnap.exists()) {
+        const dataR = docuSnap.data();
+        var name=dataR.title;
+        return name;
+      } else {
+        console.log('No matching documents.');
+        return null;
+      }
+}
 
+const splitID = async(ritemids) => {
+  const promises = ritemids.map(n => getProductNames(n));
+  const names = await Promise.all(promises);
+  setRItems([...ritems,...names.filter(n => n !== null)])
+}
+
+const showRestricted = async (email) => {
+  
+  var docRef = doc(db, "restrictions", email);
+  const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+          setRitemIDs(data.product_id);
+          const id = data.product_id;
+          console.log("hiii"+id);
+          splitID(id);
+      } else {
+        console.log('No matching documents.');
+      }
+}
+
+const showChildBalance = () => setShowChild(true);
+const closeChildBalance = () => {
+  setShowChild(false);
+  setShowAmt(false);
+  setRitemIDs([]);
+  ritems = [];
+}
+
+
+  useEffect(() => {
+    
+    const viewChildren = async () => {
+      const q = query(collection(db, "link"), where ("parent_id", "==",auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
+      const updatedData = querySnapshot.docs.map((doc) => doc.data());
+      setChildren(updatedData)
+    }
+    viewChildren().catch(err => {
+      console.error('error occured: ',err.message)
+    });
+    
+    viewChildren();
+
+    }, []);
   return (
     <>
     <div>
-      <h1>ParentHome</h1>
-      <Button variant="primary" onClick={createChild}>Link your child's account to yours</Button>
-      <Modal show={showChild} onHide={handleClose}>
-        <>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    Add new child
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <>
-                <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" />
-                <input onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
-                <Button onClick={addChildToDB}>Add your child's details</Button>
-                </>
-            </Modal.Body>
-            </>
-        </Modal>
-        <Modal show={showResponse} onHide={handleClose}>
-            <>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    Child successfully created
-                </Modal.Title>
-            </Modal.Header>
-            </>
-        </Modal>
+      <Row>
+        <Col>
+          <h1>Good Morning, User</h1>
+          {children?.map((child) => (
+                <Col>
+                <Button onClick={() => {
+                  openChildDetails(child.child_email)
+                  setMail(child.child_email)
+                  lastTransactionDate(child.child_email)
+                  showRestricted(child.child_email)
+                  if(showChild===false)
+                  {
+                    ritems = [];
+                    setRitemIDs([])
+                    setRItems([])
+                    setTimeout(showChildBalance, 300);
+                  }
+                  else if(child.child_email===mail)
+                  {
+                    ritems = [];
+                    setRitemIDs([])
+                    setRItems([])
+                    setTimeout(closeChildBalance, 300);
+                  }
+                  else{
+                    ritems = [];
+                    console.log("heere")
+                    setRitemIDs([])
+                    setTimeout(showChildBalance, 300);
+                  }
+                  }}>
+                  <h1>{child.child_username}</h1>
+                  <h1>{child.child_email}</h1>
+                  </Button>
+                  {
+                  ((showChild===true)&&(child.child_email===mail))&&
+                  <><h2>Balance={money}</h2>
+                  <h2>Last Date Of Transaction={date.toString()}</h2>
+                  <h2>Restricted={ritems?.map((item,idx) => (
+                      <span key={idx}>{item},</span>
+                  ))}</h2>
+                  <Button onClick={()=>{
+                      setShowAmt(true)
+                    }}>Add Amount</Button>
+                  {(showAmt===true)&&
+                  <>
+                      <input className="input" onChange={(e) => setAmtToPay(e.target.value)} type="number"/>
+                      <Button>Pay</Button>
+                  </>
+                  }
+                  </>
+                  }
+              </Col>
+          ))}
+        </Col>
+
+        <Col className='addChild'>
+        <h1>Add Child </h1>
+        <Link to='/addchild'>
+          <img className= 'add' src={Add} />
+          </Link>
+        </Col>
+        </Row>
     </div>
     
     </>

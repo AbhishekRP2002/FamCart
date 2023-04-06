@@ -11,11 +11,11 @@ import Login from "./Components/Login.js";
 import './App.css';
 import ParentHome from './Components/Parents/ParentHome.js';
 import ChildHome from './Components/Child/ChildHome.js';
+import AddChild from './Components/Parents/AddChild.js';
 
 
 
 function App() {
-
 
   return (
     <CartProvider>
@@ -29,7 +29,8 @@ function App() {
         <Route path="/login" element={<Login />}/>
         <Route path="/success" element={<><Navbar/><Success/></>}/>
         <Route path="/cancel" element={<><Navbar/><Cancel/></>}/>
-        <Route path="/parent" element={<><Navbar /><ParentHome /></>}/>
+        <Route path="/parent" element={<><Navbar /><ParentHome/></>}/>
+        <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
         <Route path="/child" element={<><Navbar /><ChildHome /></>}/>
         <Route path="/" element={<><Navbar/><Home/></>}/>
         </Switch>
