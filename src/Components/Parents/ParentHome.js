@@ -3,6 +3,12 @@ import {Button, Container, Navbar, Modal} from 'react-bootstrap';
 import { doc, setDoc, collection, query, where, getDocs,getDoc } from "firebase/firestore";
 import { CartContext } from '../../CartContext.js';
 import { db, auth } from "../../firebase";
+import "../Css/ParentHome.css"
+
+import Add from "../Css/Images/add.png"
+
+
+
 
 function ParentHome() {
 
@@ -31,10 +37,25 @@ function ParentHome() {
 
   return (
     <>
-    <div>
-      <h1>ParentHome</h1>
-      <Button variant="primary" onClick={createChild}>Link your child's account to yours</Button>
-      <Modal show={showChild} onHide={handleClose}>
+    <div class="ParentHome">
+      
+      <div className="content">
+      <h1 className="good-morning">Good Morning User!</h1>
+      <div className="no-child">No Child Added</div>
+      <div className="add-child">Add Child</div>
+      
+        <img
+        onClick={createChild}
+        className="add-button"
+        src={Add}
+        alt="add button"></img>
+      </div>
+
+      
+
+        
+      
+      {/* <Modal show={showChild} onHide={handleClose}>
         <>
             <Modal.Header closeButton>
                 <Modal.Title>
@@ -58,7 +79,7 @@ function ParentHome() {
                 </Modal.Title>
             </Modal.Header>
             </>
-        </Modal>
+        </Modal> */}
     </div>
     
     </>

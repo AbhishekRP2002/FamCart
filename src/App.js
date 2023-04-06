@@ -11,6 +11,7 @@ import Login from "./Components/Login.js";
 import './App.css';
 import ParentHome from './Components/Parents/ParentHome.js';
 import ChildHome from './Components/Child/ChildHome.js';
+import AddChild from './Components/Parents/AddChild.js';
 
 
 
@@ -31,7 +32,10 @@ function App() {
         <Route path="/cancel" element={<><Navbar/><Cancel/></>}/>
         <Route path="/parent" element={<><Navbar /><ParentHome /></>}/>
         <Route path="/child" element={<><Navbar /><ChildHome /></>}/>
+        <Route path="/Addchild" element={<><Navbar /><AddChild /></>}/>
+
         <Route path="/" element={<><Navbar/><Home/></>}/>
+        
         </Switch>
       </div>
     </Router>

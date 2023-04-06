@@ -8,6 +8,9 @@ import CartProduct from './CartProduct.js';
 import { auth } from '../firebase.js';
 import { doc, getDoc,getDocs,collection,where,query} from "firebase/firestore"; 
 import { db } from '../firebase.js';
+import "./Css/Navbar.css"
+import Profile from "./Css/Images/profile.png"
+import Logo from "./Css/Images/logo.png"
 
 function NavBar() {
 
@@ -63,41 +66,36 @@ function NavBar() {
 
   return (
     <>
-        <Navbar expand="sm">
-            <Navbar.Brand href="/">FamCard</Navbar.Brand>
-            <Navbar.Toggle/> {/* for collapsing in mobile */}
-            <Navbar.Collapse className="justify-content-end">
-                <Button onClick={handleShow}>Cart ({cartCount} Items)</Button>
-                <Button onClick={handleLogOut}>LogOut</Button>
-            </Navbar.Collapse>
-        </Navbar>
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    Your Shopping Cart
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {cartCount > 0
-                ?
-                <>
-                    <p>Items in your cart:</p>
-                    { cart.items?.map((product)=> (
-                        <>
-                        <CartProduct id={product.id} quantity={product.quantity}></CartProduct>
-                        </>
-                    ))}
-                    <h1>Total: {getTotalCost?.toFixed(2)}</h1>
 
-                    <Button variant="success">
-                        Proceed to check out
-                    </Button>
-                </>
-                :
-                <h1>There are no items in your cart</h1>
-                }
-            </Modal.Body>
-        </Modal>
+    <div className="nav-bar">
+           
+            <img 
+            className="main-logo"
+            src={Logo}
+            alt="logo"
+            ></img>
+            
+            
+            <div class="nav-links">
+                <ul>
+                    <li><a href="#" className=" links expenditure" target="_blank">Expenditure</a></li>
+                    <li><a href="#" className="links transactions"target="_blank">Transactions</a></li>
+                </ul>
+                
+            </div>
+            <div className="profile">
+                <img
+                className="profile-logo"
+                src={Profile}
+                alt="profile-logo">
+                </img>
+                <p className="hello-user">Hello, User</p>
+            </div>
+                    
+            
+        </div>
+        
+        
     </>
   )
 }

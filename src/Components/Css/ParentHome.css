@@ -1,0 +1,66 @@
+.ParentHome {
+    background:#F5F5F5;
+}
+.good-morning {
+    position: absolute;
+    width: 417px;
+    height: 49px;
+    left: 60px;
+    top: 123px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.no-child {
+    position: absolute;
+    width: 300px;
+    height: 34px;
+    left: 59px;
+    top: 227px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 34px;
+
+    color: #616161;
+
+}
+
+.add-child {
+    position: relative;
+    width: 141px;
+    height: 34px;
+    left: 1170px;
+    top: 220px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+
+    color: #000000;
+}
+
+.add-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 1350px;
+    top: 224px;
+
+}
+
+.add-button:hover {
+    transform: scale(1.2);
+}
