@@ -4,8 +4,6 @@
     padding: 0;
 }
 
-
-
 .container {
     position: absolute;
     margin:0;
@@ -16,8 +14,7 @@
 .nav-bar {
     position: relative;
     width: 100vw;
-height: 8vh;
-
+    height: 4rem;
     background: #144273;
 
     font-family: 'Montserrat';
@@ -25,57 +22,55 @@ height: 8vh;
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
-    
-    
-
+    display: flex;
+    align-items: center;
   }
 
  .main-logo {
     position: absolute;
-    width: 138px;
-    height: 56.31px;
-    left: 60px;
-    top: 11px;
+    height: 2.75rem;
+    left: 30px;
 
  } 
 
- ul{
-    list-style:none;
-    text-decoration:none;
- }
+.nav-right {
+   position: absolute;
+   width: 40%;
+   right: 30px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.link {
+   width: 10%;
+   margin-top: 0.5rem;
+}
 
  .links
  {
     position: absolute;
-    width: 150px;
-    height: 29px;
-    top: 19px;
-    text-decoration:none ;
+    height: 2.5rem;
+    text-decoration:none;
     color: #FFFFFF;
+    margin: auto;
  }
   
- .expenditure {
-    position:absolute;
-    right:33rem;
-    
+ .links:hover {
+   color: #d0d0d0;
  }
 
- .transactions {
-    position:absolute;
-    right: 20rem;
-    
- }
+.profile {
+   display: flex;
+   width: 30%;
+}
 
  .profile-logo {
-    position:absolute;
-    right:15rem;
-    top:0.5rem;
     width: 2rem;
+    height: 2rem;
+    margin: 5px;
  }
 
 .hello-user {
-    position:absolute;
-    right:5rem;
-    top:20px;
     color: #FFFFFF;
+    margin: auto;
 }
