@@ -1,0 +1,137 @@
+
+.restrictionPage {
+    max-width: 100vw;
+}
+
+.restriction {
+    height: 90vh;
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.sideNav {
+    background-color: white;
+    position: fixed;
+    height: 100vh;
+    width: 20%;
+}
+
+.category {
+    color: #144273;
+    text-align: left;
+    margin: 10px;
+    font: 1.5rem;
+    font-weight: 500;
+}
+
+.Rbtns {
+    display: flex;
+    flex-direction: column;
+}
+
+.Rbtn {
+    text-align: left;
+    background-color: white;
+    border-style: none;
+    color: black;
+    font-size: 1.25rem;
+    margin: 5px 10px;
+}
+
+.Rbtn:hover {
+    color: white;
+    background-color: #144273;
+    border-style: none;
+}
+
+.Rbtn:active, .Rbtn:focus, .Rbtn:visited, Rbtn:onClick {
+    color: rgb(146, 146, 146);
+    background-color: #144273;
+    border-style: none;
+}
+
+.productPart {
+    position: absolute;
+    right: 0;
+    background-color: #F8F4E9;
+    width: 80vw;
+    margin: auto;
+    margin: auto;
+    justify-content: left;
+    align-items: left;
+}
+
+
+.Rproduct {
+    right: 30px;
+    justify-content: left;
+    display: flex;
+  flex-wrap: wrap;
+  }
+  
+  .rproduct {
+    margin: auto;
+    padding: 10px;
+    margin: 20px;
+    background-color: white;
+    height: 15rem;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    position: relative;
+  }
+  
+  .product-row {
+    display: flex;
+  }
+
+  .image-wrapper {
+    width: 10rem;
+    height: 7rem;
+    overflow: hidden;
+  }
+  
+  .cropped-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dataTitle {
+    font-size: 1.5rem;
+    margin: 15px;
+    font-weight: 500;
+  }
+
+  .quantityAdd {
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quantityAdd img {
+    width: 1.25rem;
+    margin: 2px;
+   }
+ 
+   .quantityAdd h3 {
+     margin: auto;
+     width: 2rem;
+     height: 1.15rem;
+     font-size: 1rem;
+     background-color: grey;
+     color: white;
+     margin: 5px;
+    }
+
+    .quantityAdd h4 {
+        margin: auto;
+        font-size: 1rem;
+       }

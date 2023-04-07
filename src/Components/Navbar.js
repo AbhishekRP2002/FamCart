@@ -75,23 +75,21 @@ function NavBar() {
             alt="logo"
             ></img>
             
-            
-            <div class="nav-links">
-                <ul>
-                    <li><Link className="links" to="/transactions">Transactions</Link></li>
-                    <li><Link className="links" to="/restrictions">Restrictions</Link></li>
-                </ul>
-                
+            <div className='nav-right'>
+            <div className='link'>
+            <Link className="links" to="/transactions">Transactions</Link>
+            </div>
+            <div className='link'>
+            <Link className="links" to="/restrictions">Restrictions</Link>
             </div>
             <div className="profile">
                 <img
                 className="profile-logo"
                 src={Profile}
-                alt="profile-logo">
-                </img>
+                alt="profile-logo"/>
                 <p className="hello-user">Hello, User</p>
             </div>
-                    
+            </div>  
             
         </div>
         

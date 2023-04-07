@@ -3,7 +3,7 @@ import {Button, Container, Navbar, Modal} from 'react-bootstrap';
 import { doc, setDoc, collection, query, where, getDocs,getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
-import Add from "../Css/Images/Add.png";
+import Add from "../Css/Images/add.png";
 import {Row, Col} from 'react-bootstrap';
 import "../Css/ParentHome.css"
 
@@ -15,6 +15,7 @@ const [money, setMoney] = useState(0);
 const [date, setDate] = useState([]);
 var [ritems, setRItems] = useState([]);
 const [amtToPay, setAmtToPay] = useState(0);
+const [greeting, setGreeting] = useState('');
 
 var [ritemIDs, setRitemIDs] = useState([]);
 const [showChild,setShowChild] = useState(false);
@@ -107,6 +108,16 @@ const closeChildBalance = () => {
       console.error('error occured: ',err.message)
     });
     
+    const now = new Date();
+    const hour = now.getHours();
+    if (hour < 12) {
+      setGreeting('Good morning, user');
+    } else if (hour < 18) {
+      setGreeting('Good afternoon, user');
+    } else {
+      setGreeting('Good evening, user');
+    }
+
     viewChildren();
 
     }, []);
@@ -115,7 +126,7 @@ const closeChildBalance = () => {
     <div className='parentHome'>
       <Row>
         <Col>
-          <h1>Good Morning, User</h1>
+          <h1>{greeting}</h1>
           {children?.map((child) => (
                 <Col sm={12}>
                 <Button className='childDetails' onClick={() => {
@@ -169,6 +180,9 @@ const closeChildBalance = () => {
                   }
               </Col>
           ))}
+          {(children.length===0)&&
+          <h3>No child added</h3>
+          }
         </Col>
 
         <Col sm={6} className='addChild'>
