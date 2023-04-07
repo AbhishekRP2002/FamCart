@@ -57,6 +57,13 @@ function Restrictions() {
 
   return (
     <div className='restrictionPage'>
+          <div className='categoryPhone Rbtns'>
+          <Button className='Rbtn' onClick={() => viewAll() }>View All</Button>
+          <Button className='Rbtn' onClick={() => viewSome("medicines") }>Medicines</Button>
+          <Button className='Rbtn' onClick={() => viewSome("junk") }>Junk</Button>
+          <Button className='Rbtn' onClick={() => viewSome("dairy") }>Dairy Products</Button>
+          <Button className='Rbtn' onClick={() => viewSome("nuts") }>Nuts</Button>
+          </div>
       <Row className='restriction'>
         <Col className='sideNav'>
           <h2 className='category'>Category</h2>

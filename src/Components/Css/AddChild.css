@@ -1,8 +1,4 @@
-*, :before, :after {
-    margin: 0;
-    padding: 0;
-    
-}
+
 
 body{
     height: 100vh;
@@ -28,17 +24,12 @@ body{
     margin-bottom:0.5rem;
     width: 70%;
     margin: 3rem;
-    
+    font-weight: 900;
 }
 
 .enter-details{
-    
-    font-family: 'Roboto';
-    
-    font-style: normal;
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 42px;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .inputBox {
@@ -52,8 +43,6 @@ body{
     
     margin-top:1rem;
     margin-left:0.1rem;
-   
-    font-family: 'Roboto';
 
     font-weight: 700;
     font-size: 20px;
@@ -66,28 +55,24 @@ body{
     border-radius: 8px;
 
     margin-top:1rem;
-    margin-bottom:2rem;
-
+    padding: 5px;
     font-family: 'Roboto';
     font-size:30px;
-    width:100%;
+    width:30rem;
 }
 
 .submit-btn {
-    width:450px;
-    padding-left:10rem;
-    
+    width:30rem;
     text-align: center;
     font-family: 'Roboto';
-
-font-weight: 400;
-font-size: 24px;
-display: flex;
-align-items: center;
-text-transform: uppercase;
-
-color: #FFFFFF;
-background: #144273;
-border-radius: 15px;
+    margin: 50px auto;
+    vertical-align: middle;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: #144273;
+    border-radius: 15px;
 
 }
+

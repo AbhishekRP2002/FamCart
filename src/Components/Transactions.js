@@ -12,21 +12,6 @@ function Transactions() {
     const [ids,setIDs]= useState([]);
     var i=0;
 
-    const getProductNames = async(ID) => {
-        var x = ID.toString();
-          var docu = doc(db, "products", x);
-          const docuSnap = await getDoc(docu);
-        
-            if (docuSnap.exists()) {
-              const dataR = docuSnap.data();
-              setName(...name,dataR.title);
-              return name;
-            } else {
-              console.log('No matching documents.');
-              return null;
-            }
-      }
-
     useEffect(() => {
         
         const viewTransactions = async () => {
@@ -50,38 +35,38 @@ function Transactions() {
         <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
     <div className='box'>
     <Row>
-            <Col xs={2}>
-                <h2>Child's Name</h2>
+            <Col className='trans_header' xs={2}>
+                <h2>Name</h2>
             </Col>
-            <Col xs={3}>
-                <h2>Date of Transaction</h2>
+            <Col className='trans_header' xs={3}>
+                <h2>Payment Date</h2>
             </Col>
-            <Col xs={3}>
+            <Col className='trans_header' xs={3}>
                 <h2>Item purchased</h2>
             </Col>
-            <Col xs={2}>
+            <Col className='trans_header' xs={2}>
                 <h2>Quantity</h2>
             </Col>
-            <Col xs={2}>
+            <Col className='trans_header' xs={2}>
                 <h2>Total Cost</h2>
             </Col>
         </Row>
     {data?.map((child) => ( 
         <Row>
         <Col xs={2}>
-            <h5>{child.child_email}</h5>
+            <h2 className='trans_info col row'>{child.child_email}</h2>
         </Col>
         <Col xs={3}>
-            <h2>{child.date.toDate().toString()}</h2>
+            <h2 className='trans_info'>{child.date.toDate().toString()}</h2>
         </Col>
         <Col xs={3}>
-            <h2><ProductName id={child.product_id}/></h2>
+            <h2><ProductName className='trans_info' id={child.product_id} nameIsOne="1" quantity={child.quantity}/></h2>
         </Col>
         <Col xs={2}>
-            <h2>{child.quantity}</h2>
+            <h2 className='trans_info'>{child.quantity}</h2>
         </Col>
         <Col xs={2}>
-            <h2>Total Cost</h2>
+            <h2><h2><ProductName className='trans_info' id={child.product_id} nameIsOne="0"  quantity={child.quantity}/></h2></h2>
         </Col>
     </Row>
     ))}

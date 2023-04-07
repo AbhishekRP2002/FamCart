@@ -1,66 +1,158 @@
 .ParentHome {
-    background:#F5F5F5;
-}
-.good-morning {
-    position: absolute;
-    width: 417px;
-    height: 49px;
-    left: 60px;
-    top: 123px;
-
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 49px;
-    /* identical to box height */
-
-
-    color: #000000;
+    background-color: #F8F4E9;
 }
 
-.no-child {
-    position: absolute;
-    width: 300px;
-    height: 34px;
-    left: 59px;
-    top: 227px;
-
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 28px;
-    line-height: 34px;
-
-    color: #616161;
-
+.greeting {
+    padding: 80px 0 20px 0;
 }
 
-.add-child {
-    position: relative;
-    width: 141px;
-    height: 34px;
-    left: 1170px;
-    top: 220px;
-
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 34px;
-
-    color: #000000;
+.addChild {
+    padding: 150px 0 0 0;
 }
 
-.add-button {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 1350px;
-    top: 224px;
+.parentHome {
+    margin-left: 80px;
+    text-align: left;
+}
 
+.addChild {
+    display: flex;
+}
+
+.addChild h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.add {
+    width: 1.5rem;
+    margin: 0 10px;
 }
 
 .add-button:hover {
     transform: scale(1.2);
 }
+
+.childDetails {
+    background-color: white;
+    color: rgb(65, 65, 65);
+    border-style: none;
+    width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.20);
+    text-align: left;
+    margin: 20px 20px 13px 20px;
+}
+
+.childDetails:hover {
+    background-color: white;
+    color: rgb(65, 65, 65);
+    border-style: none;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+}
+
+.onechild {
+    display: flex;
+    align-items: center;
+}
+
+.child-img {
+    width: 3.5rem;
+    margin: auto;
+}
+
+.name {
+    font-size: 1.5rem;
+}
+.email {
+    font-size: 1.15rem;
+}
+
+.moreInfo {
+    background-color: #F9F9F9;
+    color: black;
+    margin: 0 20px 20px 20px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info {
+    font-size: 1rem;
+}
+
+.forSpace {
+    display: flex;
+    justify-content: space-between;
+}
+
+.restrictedPart {
+    background-color: white;
+    padding: 5px;
+}
+
+.amtBtn {
+    background-color: white;
+    color: rgb(65, 65, 65);
+    border-style: none;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.amtBtn:hover, .payBtn:hover {
+    background-color: rgb(242, 242, 242);
+}
+
+.amtPart {
+    background-color: white;
+    color: rgb(65, 65, 65);
+    border-style: none;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.toPay {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input {
+    width: 50%;
+    padding-bottom: 4px;
+    background-color: rgb(85, 85, 85);
+}
+
+.payBtn{
+    background-color: #144273;
+    color: rgb(255, 255, 255);
+    border-style: none;
+    margin:auto;
+    width: 30%;
+}
+
+@media screen and (min-width: 750px) {
+    .greeting {
+        padding: 80px 0 20px 0;
+        font-weight: 800;
+    }
+    
+    .addChild {
+        padding: 150px 0 0 0;
+        font-weight: 400;
+    }
+
+    .parentHome {
+        margin-left: 80px;
+        text-align: left;
+    }
+
+    .noChild {
+        color: rgb(155, 155, 155);
+        font-weight: 300;
+    }
+}
+
