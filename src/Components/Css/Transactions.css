@@ -1,7 +1,4 @@
-*, :before, :after {
-    margin: 0;
-    padding: 0;
-}
+
 
 .container {
     padding: 0;
@@ -17,13 +14,33 @@
 
 .box {
     margin: 30px auto;
-    width: 70%;
+    width: 80%;
+    margin-top: 5rem;
     font-size: 1rem;
     background-color: white;
+    padding: 0 10px;
 }
 
 .col {
     display: flex;
     flex-direction: column;
+    border-color: #000000;
+    border-width: 1px;
+}
 
+.Row {
+    border-color: #000000;
+    border-width: 1px;
+}
+
+.trans_info {
+    font-size: 1rem;
+    padding: 20px;
+}
+
+.trans_header {
+    font-size: 1.15rem;
+    background-color: #E6E6E6;
+    padding: 20px;
+    margin-bottom: 20px;
 }

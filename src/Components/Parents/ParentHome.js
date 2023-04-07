@@ -6,11 +6,13 @@ import { useNavigate, Link } from "react-router-dom";
 import Add from "../Css/Images/add.png";
 import {Row, Col} from 'react-bootstrap';
 import "../Css/ParentHome.css"
+import Child from "../Css/Images/child.png";
 
 function ParentHome() {
 
 const [children, setChildren] = useState([]);
 const [mail, setMail] = useState("");
+const [name, setName] = useState("");
 const [money, setMoney] = useState(0);
 const [date, setDate] = useState([]);
 var [ritems, setRItems] = useState([]);
@@ -108,28 +110,41 @@ const closeChildBalance = () => {
       console.error('error occured: ',err.message)
     });
     
+
+    const viewName = async () => {
+      var docu = doc(db, "parents", auth.currentUser.uid);
+          const docuSnap = await getDoc(docu);
+        
+            if (docuSnap.exists()) {
+              const data = docuSnap.data();
+              setName(data.username);
+            } else {
+              console.log('No matching documents.');
+            }
+    }
+
     const now = new Date();
     const hour = now.getHours();
     if (hour < 12) {
-      setGreeting('Good morning, user');
+      setGreeting('Good morning, ');
     } else if (hour < 18) {
-      setGreeting('Good afternoon, user');
+      setGreeting('Good afternoon, ');
     } else {
-      setGreeting('Good evening, user');
+      setGreeting('Good evening, ');
     }
 
     viewChildren();
-
+    viewName();
     }, []);
   return (
     <>
     <div className='parentHome'>
       <Row>
         <Col>
-          <h1>{greeting}</h1>
+          <h1 className='greeting'>{greeting}{name}</h1>
           {children?.map((child) => (
-                <Col sm={12}>
-                <Button className='childDetails' onClick={() => {
+                <Col sm={9}>
+                <Button variant="outlined" color="secondary" className='childDetails' onClick={() => {
                   openChildDetails(child.child_email)
                   setMail(child.child_email)
                   lastTransactionDate(child.child_email)
@@ -154,38 +169,55 @@ const closeChildBalance = () => {
                     setTimeout(showChildBalance, 500);
                   }
                   }}>
+                  <div className='onechild'>
+                  <div className='imgpart'>
+                  <img className= 'child-img' src={Child} />
+                  </div>
+                  <div className='otherpart'>
                   <h1 className='name'>{child.child_username}</h1>
                   <h3 className='email'>{child.child_email}</h3>
+                  </div>
+                  </div>
                   </Button>
                   {
                   ((showChild===true)&&(child.child_email===mail))&&
-                  < div className='moreInfo'><span>Balance:</span>
-                  <span>
-                  {money}
-                  </span>
-                  <h2>Last Date Of Transaction={date.toString()}</h2>
-                  <h2>Restricted items: {ritems?.map((item,idx) => (
-                      <span key={idx}>{item} </span>
+                  < div className='moreInfo'>
+                    < div className='forSpace'>
+                    <h2 className='info'>Balance:</h2>
+                    <h2 className='info'>{money}</h2>
+                    </div>
+                    < div className='forSpace'>
+                    <h2 className='info'>Last Date Of Transaction:</h2><h2 className='info'>{date.toString()}</h2>
+                    </div>
+                    < div className='forSpace restrictedPart'>
+                    <h2 className='info'><img className= 'add' src={Add} />Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
+                    <span key={idx}  className='info'>{item} </span>
                   ))}</h2>
-                  <Button onClick={()=>{
+                  </div>
+                  <div>
+                  {(showAmt===false)&&<Button  variant="outlined" color="secondary" onClick={()=>{
                       setShowAmt(true)
-                    }}>Add Amount</Button>
+                    }}  className="amtBtn">Add Amount</Button>}
                   {(showAmt===true)&&
-                  <>
-                      <input className="input" onChange={(e) => setAmtToPay(e.target.value)} type="number"/>
-                      <Button>Pay</Button>
-                  </>
+                  <div classNam="amtPart">
+                      <Button  variant="outlined" color="secondary" className="amtBtn">Add Amount</Button>
+                      <div classNam="toPay">
+                        <input className="input" onChange={(e) => setAmtToPay(e.target.value)} type="number"/>
+                        <Button className='payBtn'>Pay</Button>
+                      </div>
+                  </div>
                   }
+                  </div>
                   </div>
                   }
               </Col>
           ))}
           {(children.length===0)&&
-          <h3>No child added</h3>
+          <h3 className='noChild'>No child added</h3>
           }
         </Col>
 
-        <Col sm={6} className='addChild'>
+        <Col sm={3} className='addChild'>
         <h1>Add Child </h1>
         <Link to='/addchild'>
           <img className= 'add' src={Add} />

@@ -9,7 +9,7 @@ import { db, auth } from "../firebase";
 import { doc, setDoc, collection } from "firebase/firestore"; 
 import "./Css/Login.css"
 import Parent from "./Css/Images/parent.png";
-import Child from "./Css/Images/child.png";
+import Kid from "./Css/Images/kid.png";
 import Check from "./Css/Images/check.png";
 
 function Login() {
@@ -140,8 +140,8 @@ return false;
           :<button className="chooseBtn" onClick={handleParent}><img className= 'choose-img' src={Parent} /><hr /><h6>Parent</h6></button>
           }
           {child
-          ?<button className="chooseBtn  chooseBtnShow" onClick={handleChild}><img className= 'choose-img' src={Child} /><img className= 'check' src={Check} /><hr /><h6>Child</h6></button>
-          :<button className="chooseBtn" onClick={handleChild}><img className= 'choose-img' src={Child} /><hr /><h6>Child</h6></button>
+          ?<button className="chooseBtn  chooseBtnShow" onClick={handleChild}><img className= 'choose-img' src={Kid} /><img className= 'check' src={Check} /><hr /><h6>Child</h6></button>
+          :<button className="chooseBtn" onClick={handleChild}><img className= 'choose-img' src={Kid} /><hr /><h6>Child</h6></button>
           }
        </div>
        </Col>

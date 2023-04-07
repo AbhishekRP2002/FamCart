@@ -18,6 +18,8 @@ function AddChild() {
           balance: 0
         });
       };
+
+      
   return (
     <div className="add-kid">
         <h1 className='headline'>Let's begin with a simple journey of managing your child's pocket money!</h1>
