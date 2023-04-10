@@ -12,33 +12,37 @@ import Profile from "./Css/Images/profile.png"
 import Logo from "./Css/Images/logo.png"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
 
-    const [show,setShow]=useState(false);
-    const [isChild,setIsChild]=useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    let navigate = useNavigate();
-    const user =  auth.currentUser;
-
-    const cart = useContext(CartContext);
+    const [isChild, setIsChild] = useState(false);
     
-    const cartCount = cart.items.reduce((sum,itemamt) => sum + itemamt.quantity, 0);
+    //const cartCount = cart.items.reduce((sum,itemamt) => sum + itemamt.quantity, 0);
     
-    useEffect(()=> {
-    const child = async () => {
-      setIsChild(cart.checkChild())
-      setIsLoaded(true);
+    useEffect(() => {
+      const checkChild = async () => {
+        const docRef = doc(db, "children", auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("isChild yayyy!")
+            setIsChild(true);
+        } else {
+            console.log("parenttt")
+            setIsChild(false);
+        }
     }
-    setIsLoaded(false);
-     child()
-     if(isLoaded===true)console.log("hehe child? "+ isChild)
-  },[isLoaded])
 
-  if (isLoaded===false) {
+      setIsLoaded(false)
+      checkChild()
+      setIsLoaded(true)
+  },[])
+
+  if(isLoaded===false)
+  {
     return null;
   }
+
   return (
     <>
     <div className="nav-bar">
@@ -52,11 +56,10 @@ function NavBar() {
             <div className='link'>
             <Link className="links" to="/transactions">Transactions</Link>
             </div>
-            {(isChild)&&<div className='link'>
-            <Link className="links" to="/expenditure">Expenditure</Link>
-            </div>}
-            {(!isChild)&&<div className='link'>
+            {!(isChild) ?<div className='link'>
             <Link className="links" to="/restrictions">Restrictions</Link>
+            </div>:<div className='link'>
+            <Link className="links" to="/expenditure">Expenditure</Link>
             </div>}
             <div className="profile">
                 <Link className='profileLink' to="/details"><img
