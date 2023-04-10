@@ -11,7 +11,7 @@ import Payment from "../Payment.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-function ParentHome() {
+function ChildHome() {
 
 const [children, setChildren] = useState([]);
 const [mail, setMail] = useState("");
@@ -22,15 +22,11 @@ var [ritems, setRItems] = useState([]);
 const [amtToPay, setAmtToPay] = useState(0);
 const [greeting, setGreeting] = useState('');
 const [childId,setChildId] = useState("");
-var [ritemIDs, setRitemIDs] = useState([]);
 const [showChild,setShowChild] = useState(false);
 const [showStripe,setShowStripe] = useState(false);
 
 const [showAmt, setShowAmt] = useState(false);
 let navigate = useNavigate();
-
-const PUBLIC_KEY = "pk_test_51L53qSSJjdtRfZfqeUz2kHr28deqaXpP543D5Sj7M9ePyjE4A10csiK44F6Tx33iv7IB8W5PA8OpgKIXjcRm82xT002KPdgFvn"
-const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
 const openChildDetails = async (email) => {
   setShowChild(false)
@@ -89,7 +85,6 @@ const showRestricted = async (email) => {
   
       if (docSnap.exists()) {
         const data = docSnap.data();
-          setRitemIDs(data.product_id);
           const id = data.product_id;
           console.log("hiii"+id);
           splitID(id);
@@ -102,7 +97,6 @@ const showChildBalance = () => setShowChild(true);
 const closeChildBalance = () => {
   setShowChild(false);
   setShowAmt(false);
-  setRitemIDs([]);
   setShowStripe(false)
   ritems = [];
 }
@@ -110,19 +104,19 @@ const closeChildBalance = () => {
 
   useEffect(() => {
     
-    const viewChildren = async () => {
-      const q = query(collection(db, "link"), where ("parent_id", "==",auth.currentUser.uid));
+    const viewDetails = async () => {
+      const q = query(collection(db, "link"), where ("child_email", "==",auth.currentUser.email));
       const querySnapshot = await getDocs(q);
       const updatedData = querySnapshot.docs.map((doc) => doc.data());
       setChildren(updatedData)
     }
-    viewChildren().catch(err => {
+    viewDetails().catch(err => {
       console.error('error occured: ',err.message)
     });
     
 
     const viewName = async () => {
-      var docu = doc(db, "parents", auth.currentUser.uid);
+      var docu = doc(db, "children", auth.currentUser.uid);
           const docuSnap = await getDoc(docu);
         
             if (docuSnap.exists()) {
@@ -143,7 +137,7 @@ const closeChildBalance = () => {
       setGreeting('Good evening, ');
     }
 
-    viewChildren();
+    viewDetails();
     viewName();
     }, []);
   return (
@@ -162,7 +156,6 @@ const closeChildBalance = () => {
                   if(showChild===false)
                   {
                     ritems = [];
-                    setRitemIDs([])
                     setRItems([])
                     setShowStripe(false)
                     setShowAmt(false)
@@ -171,7 +164,6 @@ const closeChildBalance = () => {
                   else if(child.child_email===mail)
                   {
                     ritems = [];
-                    setRitemIDs([])
                     setRItems([])
                     setShowStripe(false)
                     setShowAmt(false)
@@ -179,7 +171,6 @@ const closeChildBalance = () => {
                   }
                   else{
                     ritems = [];
-                    setRitemIDs([])
                     setShowStripe(false)
                     setShowAmt(false)
                     setTimeout(showChildBalance, 500);
@@ -206,7 +197,7 @@ const closeChildBalance = () => {
                     <h2 className='info'>Last Date Of Transaction:</h2><h2 className='info'>{date.toString()}</h2>
                     </div>
                     < div className='forSpace restrictedPart'>
-                    <h2 className='info'><Link className='' to="/restrictions"><img className= 'add' src={Add} /></Link>Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
+                    <h2 className='info'>Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
                     <span key={idx}  className='info'>{item} </span>
                   ))}</h2>
                   </div>
@@ -214,17 +205,13 @@ const closeChildBalance = () => {
                   {(showAmt===false)&&<Button  variant="outlined" color="secondary" onClick={()=>{
                       setShowAmt(true)
                       setShowStripe(false)
-                    }}  className="amtBtn">Add Amount</Button>}
+                    }}  className="amtBtn">Request Amount</Button>}
                   {(showAmt===true)&&
                   <div classNam="amtPart">
-                      <Button  variant="outlined" color="secondary" className="amtBtn">Add Amount</Button>
+                      <Button  variant="outlined" color="secondary" className="amtBtn">Request Amount</Button>
                       <div classNam="toPay">
                         <input className="inputPart" onChange={(e) => setAmtToPay(e.target.value)} type="number"/>
-                        <Button className='payBtn' onClick={()=> setShowStripe(true)}>Pay</Button>
-                        {showStripe&&
-                        <Elements stripe={stripeTestPromise}>
-                        <Payment amt={amtToPay} id={childId} />
-                        </Elements>}
+                        <Button className='payBtn' onClick={()=> setShowStripe(true)}>Request</Button>
                       </div>
                   </div>
                   }
@@ -251,4 +238,4 @@ const closeChildBalance = () => {
   )
 }
 
-export default ParentHome
+export default ChildHome

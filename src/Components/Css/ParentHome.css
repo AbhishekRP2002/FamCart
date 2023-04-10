@@ -1,22 +1,36 @@
+.container {
+    width: 100vw;
+}
+
 .ParentHome {
     background-color: #F8F4E9;
+    position: relative;
+    width: 100vh;
 }
 
 .greeting {
-    padding: 80px 0 20px 0;
+    padding: 80px 20px 20px 20px;
+    margin: 20px;
+    color: black;
+}
+
+.rowPart {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col1 {
+    width: 70%;
 }
 
 .addChild {
-    padding: 150px 0 0 0;
+    margin: 10px;
+    display: flex;
 }
 
 .parentHome {
     margin-left: 80px;
     text-align: left;
-}
-
-.addChild {
-    display: flex;
 }
 
 .addChild h1 {
@@ -117,42 +131,59 @@
 
 .toPay {
     display: flex;
-    justify-content: space-evenly;
+    margin: auto;
+
 }
 
-.input {
-    width: 50%;
+.inputPart {
+    width: 65%;
+    margin: 10px;
     padding-bottom: 4px;
-    background-color: rgb(85, 85, 85);
+    background-color: rgb(205, 205, 205);
+    border-style: none;
+    height: 2.5rem;
+    border-radius: 5px;
 }
 
 .payBtn{
     background-color: #144273;
-    color: rgb(255, 255, 255);
+    color: white;
     border-style: none;
     margin:auto;
+    margin-bottom: 1px;
     width: 30%;
+    height: 2.5rem;
+}
+
+.payBtn:hover {
+    background-color: #1e5a9b;
+} 
+
+.greeting {
+    padding: 80px 0 20px 0;
+    font-weight: 800;
+}
+
+.addChild {
+    font-weight: 400;
+}
+
+.parentHome {
+    margin-left: 80px;
+    text-align: left;
+}
+
+.noChild {
+    color: rgb(155, 155, 155);
+    font-weight: 300;
+}
+
+#card-element {
+    width: 500px;
+    height: 500px;
 }
 
 @media screen and (min-width: 750px) {
-    .greeting {
-        padding: 80px 0 20px 0;
-        font-weight: 800;
-    }
     
-    .addChild {
-        padding: 150px 0 0 0;
-        font-weight: 400;
-    }
-
-    .parentHome {
-        margin-left: 80px;
-        text-align: left;
-    }
-
-    .noChild {
-        color: rgb(155, 155, 155);
-        font-weight: 300;
-    }
 }
 

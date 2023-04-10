@@ -12,7 +12,7 @@
    width: 100vw;
    height: 4rem;
    background: #144273;
-
+   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.20);
    font-family: 'Montserrat';
    font-style: normal;
    font-weight: 500;
@@ -24,20 +24,17 @@
 
 .main-logo {
    height: 2.75rem;
-
+   margin-left: 60px;
 } 
 
 .nav-right {
   position: absolute;
-  right: 30px;
+  right: 70px;
   display: flex;
   justify-content: space-between;
 }
 
-.link {
-  width: 10%;
-  margin-top: 0.5rem;
-}
+
 
 .links
 {
@@ -45,7 +42,7 @@
    height: 2.5rem;
    text-decoration:none;
    color: #FFFFFF;
-   margin: auto;
+   margin: 0 20px;
 }
  
 .links:hover {
@@ -54,18 +51,20 @@
 
 .profile {
   display: flex;
-  width: 30%;
+  width: 20%;
+  height: 2.5;
 }
 
 .profile-logo {
-   width: 2rem;
-   height: 2rem;
-   margin: 2px;
+   width: 1.75rem;
+   height: 1.75rem;
+   margin: 0 auto;
 }
 
 .hello-user {
    color: #FFFFFF;
-   margin: auto 2px;
+   margin: auto;
+   height: 2.5rem;
 }
 
  }
@@ -76,7 +75,6 @@
       }
 
       .phoneNavBar {
-         width: 100vw;
          background-color: #144273;
          position: relative;
        }
@@ -99,7 +97,22 @@
        }
       } 
 
- @media screen and (min-width: 1180px) {
+
+      @media screen and (min-width: 1280px) {
+        .nav-right {
+           width: 30vw;
+         }
+
+         .profile-logo {
+          margin-right: 9px;
+         }
+         .phoneNavBar {
+           display: none;
+         }
+      }
+
+
+ @media screen and (max-width: 1280px) and(min-width: 1180px) {
    .nav-right {
       width: 40vw;
     }
@@ -109,11 +122,30 @@
  }
 
 
- @media screen and (max-width: 1180px) and (min-width: 750px) {
+ @media screen and (max-width: 1180px) and (min-width: 920px) {
    .nav-right {
-      width: 60vw;
+      width: 50vw;
     }
     .phoneNavBar {
       display: none;
     }
  }
+
+ @media screen and (max-width: 920px) and (min-width: 750px) {
+  .nav-right {
+     width: 60vw;
+   }
+   .phoneNavBar {
+     display: none;
+   }
+}
+
+.profileLink {
+  text-decoration: none;
+  display: flex;
+  color: white;
+}
+
+.profileLink p:hover {
+  color: #d0d0d0;
+}
