@@ -1,9 +1,11 @@
 import { createContext, useState } from "react";
 import { doc, getDoc,getDocs,collection,where,query} from "firebase/firestore"; 
-import { db } from "./firebase";
+import { db,auth } from "./firebase";
 
 export const CartContext =createContext({
     items: [],
+    isChild: false,
+    checkChild: () => {},
     getProductQuantity: () => {},
     addOneToCart: () => {},
     removeOneFromCart: () => {},
@@ -15,6 +17,20 @@ export function CartProvider({children}) {
 
     const [productList, setProductList] = useState([]);
 
+    const checkChild = async () => {
+        console.log(auth.currentUser.uid);
+        const docRef = doc(db, "children", auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("isChild yayyy!")
+            setIsChild(true);
+        } else {
+            console.log("parenttt")
+            setIsChild(false);
+        }
+    }
+    
+
     const getProductData = async (id) => {
         const q = query(collection(db, "products"), where("id", "==", id));
         const querySnapshot = await getDocs(q);
@@ -25,6 +41,8 @@ export function CartProvider({children}) {
     const [cartProducts,setCartProducts] =useState([]);
      //in cart we will store id and quantity only
 
+     const [isChild, setIsChild] = useState(false);
+     
      function getProductQuantity(id) {
         const quantity = cartProducts.find(prod => prod.id === id)?.quantity; //if undefined it wont throw error cuz of '?'
         if(quantity===undefined)
@@ -98,6 +116,8 @@ export function CartProvider({children}) {
 
     const contextValue = {
         items: cartProducts,
+        checkChild,
+        isChild: checkChild,
         getProductQuantity,
         addOneToCart,
         removeOneFromCart,

@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { doc, setDoc, collection, query, where, getDocs,getDoc } from "firebase/firestore";
 import {Row, Col} from 'react-bootstrap';
 import "./Css/Transactions.css";
 import { db, auth } from "../firebase";
 import ProductName from './ProductName';
+import { CartContext } from '../CartContext.js';
 
 function Transactions() {
 
     const [data,setData]= useState([]);
     const [name,setName]= useState([]);
     const [ids,setIDs]= useState([]);
-    var i=0;
+    const cart = useContext(CartContext);
+
+    let isChild;
 
     useEffect(() => {
         
@@ -25,9 +28,13 @@ function Transactions() {
         viewTransactions().catch(err => {
           console.error('error occured: ',err.message)
         });
+
+        const child = async () => {
+            isChild = cart.checkChild()
+          }
         
         viewTransactions();
-    
+        child();
         }, []);
 
   return (
@@ -35,29 +42,29 @@ function Transactions() {
         <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
     <div className='box'>
     <Row>
-            <Col className='trans_header' xs={2}>
+            {isChild&&<Col className='trans_header'>
                 <h2>Name</h2>
-            </Col>
-            <Col className='trans_header' xs={3}>
+            </Col>}
+            <Col className='trans_header'>
                 <h2>Payment Date</h2>
             </Col>
-            <Col className='trans_header' xs={3}>
+            <Col className='trans_header'>
                 <h2>Item purchased</h2>
             </Col>
-            <Col className='trans_header' xs={2}>
+            <Col className='trans_header'>
                 <h2>Quantity</h2>
             </Col>
-            <Col className='trans_header' xs={2}>
+            <Col className='trans_header'>
                 <h2>Total Cost</h2>
             </Col>
         </Row>
     {data?.map((child) => ( 
         <Row>
-        <Col xs={2}>
+        {(!cart.isChild)&&<Col xs={2}>
             <h2 className='trans_info col row'>{child.child_email}</h2>
-        </Col>
+        </Col>}
         <Col xs={3}>
-            <h2 className='trans_info'>{child.date.toDate().toString()}</h2>
+             <h2 className='trans_info'>{child.date.toDate().toString()}</h2> {/* //change in firebase */}
         </Col>
         <Col xs={3}>
             <h2><ProductName className='trans_info' id={child.product_id} nameIsOne="1" quantity={child.quantity}/></h2>

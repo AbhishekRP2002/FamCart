@@ -43,7 +43,6 @@ function Restrictions() {
     const updated = querySnaps.docs.map((doc) => doc.data()
     );
     setData(updated);
-
   }
 
   const viewSome = async (type) => {
