@@ -64,7 +64,7 @@ function Login({setIsChild}) {
         if(child===true)
         navigate("/")
         else if(parent===true)
-        navigate("/details")
+        navigate("/details/:false")
       })
       .catch((error) => {
         alert(error.message);
@@ -86,7 +86,7 @@ function Login({setIsChild}) {
         else if(parent===true)
         {
           saveParentData(uid);
-          navigate("/details")
+          navigate("/details/:false")
         }
         })
       .catch((error) => {

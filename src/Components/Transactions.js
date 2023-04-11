@@ -5,40 +5,14 @@ import "./Css/Transactions.css";
 import { db, auth } from "../firebase";
 import ProductName from './ProductName';
 import { CartContext } from '../CartContext.js';
+import { useParams } from "react-router-dom";
 
 function Transactions() {
 
     const [data,setData]= useState([]);
-    const [name,setName]= useState([]);
-    const [ids,setIDs]= useState([]);
-    const [isLoaded,setIsLoaded]= useState(false);  
-    const [isChild,setIsChild]= useState(false);      
-    
-        const checkChild = async () => {
-        const docRef = doc(db, "children", auth.currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("isChild yayyy!")
-            setIsChild(true);
-        } else {
-            console.log("parenttt")
-            setIsChild(false);
-        }
-    }
+    const { isChild } = useParams();
 
     useEffect(() => {
-        setIsLoaded(false)
-        const checkChild = async () => {
-            const docRef = doc(db, "children", auth.currentUser.uid);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                console.log("isChild yayyy!")
-                setIsChild(true);
-            } else {
-                console.log("parenttt")
-                setIsChild(false);
-            }
-        }
 
         const viewTransactions = async () => {
 
@@ -59,16 +33,8 @@ function Transactions() {
             setData(updated);
           }
 
-        setIsLoaded(true)
-        console.log("check done")
-
-        checkChild()
-        if(isLoaded)
         viewTransactions()
-        },[isLoaded]);
-
-if(!isLoaded)
-return null;
+        },[]);
 
   return (
     <div className='transaction'>

@@ -54,7 +54,7 @@ function NavBar() {
             
             <div className='nav-right'>
             <div className='link'>
-            <Link className="links" to="/transactions">Transactions</Link>
+            <Link className="links" to={`/transactions/${isChild}`}>Transactions</Link>
             </div>
             {!(isChild) ?<div className='link'>
             <Link className="links" to="/restrictions">Restrictions</Link>
@@ -62,7 +62,7 @@ function NavBar() {
             <Link className="links" to="/expenditure">Expenditure</Link>
             </div>}
             <div className="profile">
-                <Link className='profileLink' to="/details"><img
+                <Link className='profileLink' to={`/details/${isChild}`}><img
                 className="profile-logo"
                 src={Profile}
                 alt="profile-logo"/>
@@ -83,9 +83,9 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <Link to="/home">Home</Link>
-            <Link to="/transactions">Transactions</Link>
+            <Link to={`/transactions/${isChild}`}>Transactions</Link>
             <Link to="/restrictions">Restrictions</Link>
-            <Link to="/details">Profile</Link>
+            <Link to={`/details/${isChild}`}>Profile</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
