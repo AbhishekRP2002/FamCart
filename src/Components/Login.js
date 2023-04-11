@@ -137,11 +137,11 @@ return false;
           <br />
           {parent
           ?<button className="chooseBtn chooseBtnShow" onClick={handleParent}><img className= 'choose-img' src={Parent} /><img className= 'check' src={Check} /><hr /><h6>Parent</h6></button>
-          :<button className="chooseBtn" onClick={handleParent}><img className= 'choose-img' src={Parent} /><hr /><h6>Parent</h6></button>
+          :<button className="chooseBtn" onClick={handleParent}><img className= 'choose-img' src={Parent} /><hr /><h6 className='select'>Parent</h6></button>
           }
           {child
           ?<button className="chooseBtn  chooseBtnShow" onClick={handleChild}><img className= 'choose-img' src={Kid} /><img className= 'check' src={Check} /><hr /><h6>Child</h6></button>
-          :<button className="chooseBtn" onClick={handleChild}><img className= 'choose-img' src={Kid} /><hr /><h6>Child</h6></button>
+          :<button className="chooseBtn" onClick={handleChild}><img className= 'choose-img' src={Kid} /><hr /><h6 className='select'>Child</h6></button>
           }
        </div>
        </Col>
@@ -188,7 +188,7 @@ return false;
             
           </div>
            <div className="toggle">
-                Don't have an account?
+                <h6 className='noAccount'></h6>Don't have an account?
                 <button onClick={toggleAuth} className="toggleBtn">Sign up</button>
            </div>
           </>
