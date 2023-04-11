@@ -5,15 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container} from 'react-bootstrap';
 import CartProvider from "./CartContext.js";
 import Navbar from "./Components/Navbar.js";
-import Success from "./Components/Success.js";
-import Cancel from "./Components/Cancel.js";
 import Login from "./Components/Login.js";
 import './App.css';
 import ParentHome from './Components/Parents/ParentHome.js';
 import AddChild from './Components/Parents/AddChild.js';
 import Transactions from './Components/Transactions.js';
 import Restrictions from './Components/Restrictions.js';
-
 
 function App() {
 
@@ -27,11 +24,9 @@ function App() {
       <div className="app">
         <Switch>
         <Route path="/login" element={<Login />}/>
-        <Route path="/success" element={<><Navbar/><Success/></>}/>
-        <Route path="/cancel" element={<><Navbar/><Cancel/></>}/>
         <Route path="/transactions" element={<><Navbar/><Transactions/></>}/>
         <Route path="/restrictions" element={<><Navbar/><Restrictions/></>}/>
-        <Route path="/parent" element={<><Navbar /><ParentHome/></>}/>
+        <Route path="/details" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
 
         <Route path="/" element={<><Navbar/><Home/></>}/>

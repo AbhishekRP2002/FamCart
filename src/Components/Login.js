@@ -12,7 +12,7 @@ import Parent from "./Css/Images/parent.png";
 import Kid from "./Css/Images/kid.png";
 import Check from "./Css/Images/check.png";
 
-function Login() {
+function Login({setIsChild}) {
     const [parent,setParent]=useState(false);
     const [child,setChild]=useState(false);
 
@@ -37,6 +37,7 @@ function Login() {
   let navigate = useNavigate();
 
   const saveParentData = async (id) => {
+    setIsChild(false);
       await setDoc(doc(db, "parents", id), {
         id: id,
         username: username,
@@ -46,6 +47,7 @@ function Login() {
   }
 
   const saveChildData = async (id) => {
+    setIsChild(true);
     await setDoc(doc(db, "children", id), {
       id: id,
       username: username,
@@ -62,7 +64,7 @@ function Login() {
         if(child===true)
         navigate("/")
         else if(parent===true)
-        navigate("/parent")
+        navigate("/details")
       })
       .catch((error) => {
         alert(error.message);
@@ -84,7 +86,7 @@ function Login() {
         else if(parent===true)
         {
           saveParentData(uid);
-          navigate("/parent")
+          navigate("/details")
         }
         })
       .catch((error) => {

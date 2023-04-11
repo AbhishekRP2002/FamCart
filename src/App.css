@@ -1,40 +1,66 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-.App {
+.payment {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.payment .FormGroup {
+	margin: 0 15px 10px;
+	padding: 0;
+	border-style: none;
+	background-color: #144273;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #144273;;
+	border-radius: 6px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.payment .FormRow {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-left: 15px;
+	border-top: 1px solid #144273;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.payment .StripeElement--webkit-autofill {
+	background: transparent !important;
 }
 
-.App-link {
-  color: #61dafb;
+.payment .StripeElement {
+	width: 100%;
+	padding: 11px 15px 11px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.payment button {
+	display: block;
+	font-size: 16px;
+	width: calc(100% - 30px);
+	height: 40px;
+	margin: 20px 15px 0;
+	background-color: #144273;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #144273;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 100ms ease-in-out;
+	will-change: transform, background-color, box-shadow;
+	border: none;
+}
+
+.payment button:hover, .payment button:active {
+	background-color: #205c9d;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #144273;
+	transform: scale(0.99);
+}
+
+
+.payment  {
+	margin-left: 25%;
+	margin-top: 20px;
+	margin-right: 25%;
+}
+
+.payment h1,
+.payment h3 {
+	text-align: center;
 }
