@@ -5,46 +5,56 @@ import "./Css/Transactions.css";
 import { db, auth } from "../firebase";
 import ProductName from './ProductName';
 import { CartContext } from '../CartContext.js';
+import { useParams } from "react-router-dom";
 
 function Transactions() {
 
     const [data,setData]= useState([]);
-    const [name,setName]= useState([]);
-    const [ids,setIDs]= useState([]);
-    const cart = useContext(CartContext);
-
-    let isChild;
+    const { isChild } = useParams();
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        
         const viewTransactions = async () => {
-          const q = query(collection(db, "transactions"), where ("parent_id", "==",auth.currentUser.uid));
-          const querySnaps = await getDocs(q);
-          const updated = querySnaps.docs.map((doc) => doc.data()
-          );
-          setData(updated);
-          console.log(data);
-        }
-        viewTransactions().catch(err => {
-          console.error('error occured: ',err.message)
-        });
 
-        const child = async () => {
-            isChild = cart.checkChild()
+
+            var q = "";
+    
+            if(isChild.toString()==="true")
+            {
+              q = query(collection(db, "transactions"), where ("child_email", "==",auth.currentUser.email));
+            }
+            else
+            {
+              q = query(collection(db, "transactions"), where ("parent_id", "==",auth.currentUser.uid))
+            }
+            const querySnaps = await getDocs(q);
+            const updated = querySnaps.docs.map((doc) => doc.data());
+            setData(updated);
           }
-        
-        viewTransactions();
-        child();
-        }, []);
+          viewTransactions().catch(err => {
+            console.error('error occured: ',err.message)
+          });
+
+        setIsLoaded(false)
+        viewTransactions()
+        setIsLoaded(true)
+
+        },[]);
+
+        if(isLoaded===false)
+        {
+            return null;
+        }     
 
   return (
     <div className='transaction'>
+        <>
         <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
     <div className='box'>
     <Row>
-            {isChild&&<Col className='trans_header'>
-                <h2>Name</h2>
-            </Col>}
+            {(isChild.toString()==="false")&&<Col className='trans_header'>
+                <h2>Child</h2>
+            </Col>} 
             <Col className='trans_header'>
                 <h2>Payment Date</h2>
             </Col>
@@ -60,9 +70,9 @@ function Transactions() {
         </Row>
     {data?.map((child) => ( 
         <Row>
-        {(!cart.isChild)&&<Col xs={2}>
-            <h2 className='trans_info col row'>{child.child_email}</h2>
-        </Col>}
+        <Col>
+        {(isChild.toString()==="false")&&<h2 className='trans_info col row'>{child.child_email}</h2>}
+        </Col>
         <Col xs={3}>
              <h2 className='trans_info'>{child.date.toDate().toString()}</h2> {/* //change in firebase */}
         </Col>
@@ -78,6 +88,7 @@ function Transactions() {
     </Row>
     ))}
     </div>
+    </>
     </div>
   )
 }
