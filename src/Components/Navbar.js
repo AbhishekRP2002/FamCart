@@ -25,10 +25,8 @@ function NavBar() {
         const docRef = doc(db, "children", auth.currentUser.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("isChild yayyy!")
             setIsChild(true);
         } else {
-            console.log("parenttt")
             setIsChild(false);
         }
     }

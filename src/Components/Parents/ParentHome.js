@@ -30,6 +30,7 @@ const [showChildBalanceAmt,setShowChildBalanceAmt] = useState(false);
 const [showStripe,setShowStripe] = useState(false);  
 const [showAmt, setShowAmt] = useState(false);
 const [requestPlaced, setRequestPlaced] = useState(false);
+const [isLoaded,setIsLoaded] = useState(false);
 
 const PUBLIC_KEY = "pk_test_51L53qSSJjdtRfZfqeUz2kHr28deqaXpP543D5Sj7M9ePyjE4A10csiK44F6Tx33iv7IB8W5PA8OpgKIXjcRm82xT002KPdgFvn"
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
@@ -120,10 +121,14 @@ const addToRequest = async() => {
     
     const viewChildren = async () => {
       var q = "";
-      if(isChild===false)
-      q = query(collection(db, "link"), where ("parent_id", "==",auth.currentUser.uid));
+      if(isChild.toString()==="false")
+      {
+        q = query(collection(db, "link"), where ("parent_id", "==",auth.currentUser.uid));
+      }
       else
-      q = query(collection(db, "link"), where ("child_email", "==",auth.currentUser.email));
+      {
+        q = query(collection(db, "link"), where ("child_email", "==",auth.currentUser.email));
+      }
       const querySnapshot = await getDocs(q);
       const updatedData = querySnapshot.docs.map((doc) => doc.data());
       setChildren(updatedData)
@@ -135,7 +140,9 @@ const addToRequest = async() => {
 
     const viewName = async () => {
       var docu ="";
-      (isChild? docu = doc(db, "children", auth.currentUser.uid):docu = doc(db, "parents", auth.currentUser.uid))
+      ((isChild.toString()==="true")
+      ? docu = doc(db, "children", auth.currentUser.uid)
+      :docu = doc(db, "parents", auth.currentUser.uid))
           const docuSnap = await getDoc(docu);
             if (docuSnap.exists()) {
               const data = docuSnap.data();
@@ -154,29 +161,30 @@ const addToRequest = async() => {
     } else {
       setGreeting('Good evening, ');
     }
-
-    if(isChild===true)
-    openChildDetails(auth.currentUser.email);
+    setIsLoaded(false)
     viewName();
-    viewChildren()
-    
-    }, [openChildDetails]);
+    viewChildren();
+    setIsLoaded(true)
+    }, []);
 
-
+  if(isLoaded===false)
+  {
+    return null;
+  }
   return (
     <>
     <div className='parentHome'>
       <div className='header'>
         <h1 className='greeting'>{greeting}{name}</h1>
-        {isChild&&
-        showChildBalanceAmt&&
+        {(isChild.toString()==="true")&&
+        (showChildBalanceAmt===true)&&
         <h2 className='balanceHeader'>Balance : Rs. {money}</h2>
         }
       </div>
         <div className='rowPart'>
-        {children?.map((child) => (
-            <>
           <div className='col1'>
+          {children?.map((child) => (
+            <>
                   <Col>
                   <Button variant="outlined" color="secondary" className='childDetails' onClick={() => {
                     openChildDetails(child.child_email)
@@ -223,7 +231,7 @@ const addToRequest = async() => {
                     {
                     ((showChild===true)&&(child.child_email===mail))&&
                     < div className='moreInfo'>
-                      {(!isChild)&&
+                      {(isChild.toString()==="false")&&
                         <div className='forSpace'>
                         <h2 className='info'>Balance:</h2>
                         <h2 className='info'>{money}</h2>
@@ -233,12 +241,14 @@ const addToRequest = async() => {
                       <h2 className='info'>Last Date Of Transaction:</h2><h2 className='info'>{date.toString()}</h2>
                       </div>
                       < div className='forSpace restrictedPart'>
-                      <h2 className='info'>{(isChild===false)&&<Link className='' to="/restrictions"><img className= 'add' src={Add} /></Link>}Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
+                      <h2 className='info'>{(isChild.toString()==="false")&&
+                      <Link className='' to="/restrictions"><img className= 'add' src={Add} /></Link>}
+                      Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
                       <span key={idx}  className='info'>{item} </span>
                     ))}</h2>
                     </div>
                     <div>
-                    {isChild
+                    {(isChild.toString()==="true")
                       ?<>
                       {(showAmt===false)&&
                         <Button  variant="outlined" color="secondary" onClick={()=>{
@@ -285,20 +295,20 @@ const addToRequest = async() => {
                           </div>
                         }
                     </>
-                    }    
+                    }   
                     </div>
                     </div>
                     }
                 </Col>
-            {
-            (isChild===false)&&
+            {(isChild.toString()==="false")&&
               (children.length===0)&&
               <h3 className='noChild'>No child added</h3>
             }
+            </>))}
           </div>
-        </>))}
+
         <div className='addChild'>
-        {(isChild===false)&&
+        {(isChild.toString()==="false")&&
          <>
            <h1>Add Child </h1>
             <Link to='/addchild'>

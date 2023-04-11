@@ -11,15 +11,15 @@ function Transactions() {
 
     const [data,setData]= useState([]);
     const { isChild } = useParams();
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-
         const viewTransactions = async () => {
 
 
             var q = "";
     
-            if(isChild)
+            if(isChild.toString()==="true")
             {
               q = query(collection(db, "transactions"), where ("child_email", "==",auth.currentUser.email));
             }
@@ -28,22 +28,33 @@ function Transactions() {
               q = query(collection(db, "transactions"), where ("parent_id", "==",auth.currentUser.uid))
             }
             const querySnaps = await getDocs(q);
-            const updated = querySnaps.docs.map((doc) => doc.data()
-            );
+            const updated = querySnaps.docs.map((doc) => doc.data());
             setData(updated);
           }
+          viewTransactions().catch(err => {
+            console.error('error occured: ',err.message)
+          });
 
+        setIsLoaded(false)
         viewTransactions()
+        setIsLoaded(true)
+
         },[]);
+
+        if(isLoaded===false)
+        {
+            return null;
+        }     
 
   return (
     <div className='transaction'>
+        <>
         <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
     <div className='box'>
     <Row>
-            {!(isChild)&&<Col className='trans_header'>
-                <h2>Name</h2>
-            </Col>}
+            {(isChild.toString()==="false")&&<Col className='trans_header'>
+                <h2>Child</h2>
+            </Col>} 
             <Col className='trans_header'>
                 <h2>Payment Date</h2>
             </Col>
@@ -59,9 +70,9 @@ function Transactions() {
         </Row>
     {data?.map((child) => ( 
         <Row>
-        {(!isChild)&&<Col>
-            <h2 className='trans_info col row'>{child.child_email}</h2>
-        </Col>}
+        <Col>
+        {(isChild.toString()==="false")&&<h2 className='trans_info col row'>{child.child_email}</h2>}
+        </Col>
         <Col xs={3}>
              <h2 className='trans_info'>{child.date.toDate().toString()}</h2> {/* //change in firebase */}
         </Col>
@@ -77,6 +88,7 @@ function Transactions() {
     </Row>
     ))}
     </div>
+    </>
     </div>
   )
 }
