@@ -24,9 +24,9 @@ function App() {
       <div className="app">
         <Switch>
         <Route path="/login" element={<Login />}/>
-        <Route path="/transactions" element={<><Navbar/><Transactions/></>}/>
+        <Route path="/transactions/:isChild" element={<><Navbar/><Transactions/></>}/>
         <Route path="/restrictions" element={<><Navbar/><Restrictions/></>}/>
-        <Route path="/details" element={<><Navbar /><ParentHome/></>}/>
+        <Route path="/details/:isChild" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
 
         <Route path="/" element={<><Navbar/><Home/></>}/>
