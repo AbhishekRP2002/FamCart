@@ -323,11 +323,9 @@ const addToRequest = async() => {
         {(isChild.toString()==="false")&&
          <>
            <h1>Add Child </h1>
-            <Link to='/addchild'>
-              <img className= 'add' src={Add} />
-            </Link>
-          </>
-         }
+                <Link to='/addchild'>
+                  <img className= 'add' src={Add} />
+              </Link>
           <img
           className='notifs-icon'
           src={notifs}
@@ -344,6 +342,8 @@ const addToRequest = async() => {
               </div>
             ))}
           </div>
+          </>
+         }
         </div>
         </div>
     </div>
