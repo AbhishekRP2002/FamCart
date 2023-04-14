@@ -8,12 +8,6 @@
     width: 100vh;
 }
 
-.greeting {
-    padding: 80px 20px 20px 20px;
-    margin: 20px;
-    color: black;
-}
-
 .rowPart {
     display: flex;
     justify-content: space-between;
@@ -166,8 +160,20 @@
     background-color: #1e5a9b;
 } 
 
-.greeting {
+.requestPlaced {
+    margin: 20px 30px;
+}
+
+.header {
+    display: flex;
     padding: 80px 0 20px 0;
+    padding: 80px 20px 20px 20px;
+    margin: 20px;
+    justify-content: space-between;
+}
+
+.greeting {
+    color: black;
     font-weight: 800;
 }
 

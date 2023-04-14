@@ -101,7 +101,7 @@
 
       @media screen and (min-width: 1280px) {
         .nav-right {
-           width: 30vw;
+           width: 40vw;
          }
 
          .profile-logo {
@@ -113,9 +113,9 @@
       }
 
 
- @media screen and (max-width: 1280px) and(min-width: 1180px) {
+ @media screen and (max-width: 1279px) and(min-width: 1180px) {
    .nav-right {
-      width: 40vw;
+      width: 70vw;
     }
     .phoneNavBar {
       display: none;
@@ -123,18 +123,18 @@
  }
 
 
- @media screen and (max-width: 1180px) and (min-width: 920px) {
+ @media screen and (max-width: 1179px) and (min-width: 920px) {
    .nav-right {
-      width: 50vw;
+      width: 60vw;
     }
     .phoneNavBar {
       display: none;
     }
  }
 
- @media screen and (max-width: 920px) and (min-width: 750px) {
+ @media screen and (max-width: 919px) and (min-width: 750px) {
   .nav-right {
-     width: 60vw;
+     width: 70vw;
    }
    .phoneNavBar {
      display: none;
