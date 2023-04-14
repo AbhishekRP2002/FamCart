@@ -11,6 +11,7 @@ import ParentHome from './Components/Parents/ParentHome.js';
 import AddChild from './Components/Parents/AddChild.js';
 import Transactions from './Components/Transactions.js';
 import Restrictions from './Components/Restrictions.js';
+import Expenditure from './Components/Expenditure.js';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/restrictions" element={<><Navbar/><Restrictions/></>}/>
         <Route path="/details" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
+        <Route path='/expenditure' element ={<><Navbar/><Expenditure/></>}/>
 
         <Route path="/" element={<><Navbar/><Home/></>}/>
         

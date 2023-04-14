@@ -53,7 +53,7 @@ function NavBar() {
             <Link className="links" to="/transactions">Transactions</Link>
             </div>
             {(isChild)&&<div className='link'>
-            <Link className="links" to="/expenditure">Expenditure</Link>
+            <Link className="links " to="/expenditure">Expenditure</Link>
             </div>}
             {(!isChild)&&<div className='link'>
             <Link className="links" to="/restrictions">Restrictions</Link>

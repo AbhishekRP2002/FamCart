@@ -7,12 +7,13 @@ import Add from "../Css/Images/add.png";
 import {Row, Col} from 'react-bootstrap';
 import "../Css/ParentHome.css"
 import Child from "../Css/Images/child.png";
+import notifs from "../Css/Images/notifs.png";
 import Payment from "../Payment.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 function ParentHome() {
-
+const [request,setRequests]= useState([]);
 const [children, setChildren] = useState([]);
 const [mail, setMail] = useState("");
 const [name, setName] = useState("");
@@ -133,6 +134,8 @@ const closeChildBalance = () => {
             }
     }
 
+   
+
     const now = new Date();
     const hour = now.getHours();
     if (hour < 12) {
@@ -146,6 +149,13 @@ const closeChildBalance = () => {
     viewChildren();
     viewName();
     }, []);
+
+    const fetchRequests = async () => {
+      const querySnapshot = await getDocs(collection(db, 'requests'));
+      const docs= querySnapshot.docs.map((doc) => ({id: doc .id, ...doc.data()}));
+      setRequests(docs);
+    };
+
   return (
     <>
     <div className='parentHome'>
@@ -243,6 +253,22 @@ const closeChildBalance = () => {
         <Link to='/addchild'>
           <img className= 'add' src={Add} />
           </Link>
+          <img
+          className='notifs-icon'
+          src={notifs}
+          onClick={() => {
+            fetchRequests()
+          }}></img>
+          <div className='requests'>
+            {request.map((item) => (
+
+              <div className='request-list' key={item.id}>
+                <h3> {item.email}</h3>
+                <h3>Amount Requested: {item.amt}</h3>
+
+              </div>
+            ))}
+          </div>
         </div>
         </div>
     </div>
