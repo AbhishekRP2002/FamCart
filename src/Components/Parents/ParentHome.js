@@ -7,6 +7,7 @@ import Add from "../Css/Images/add.png";
 import {Row, Col} from 'react-bootstrap';
 import "../Css/ParentHome.css"
 import Child from "../Css/Images/child.png";
+import notifs from "../Css/Images/notifs.png";
 import Payment from "../Payment.js"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -14,6 +15,7 @@ import { useParams } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 
 function ParentHome() {
+const [request,setRequests]= useState([]);
 
 const { isChild } = useParams();
 const [children, setChildren] = useState([]);
@@ -154,6 +156,8 @@ const addToRequest = async() => {
             }
     }
 
+   
+
     const now = new Date();
     const hour = now.getHours();
     if (hour < 12) {
@@ -168,6 +172,12 @@ const addToRequest = async() => {
     viewChildren();
     setIsLoaded(true)
     }, []);
+
+    const fetchRequests = async () => {
+      const querySnapshot = await getDocs(collection(db, 'requests'));
+      const docs= querySnapshot.docs.map((doc) => ({id: doc .id, ...doc.data()}));
+      setRequests(docs);
+    };
 
   if(isLoaded===false)
   {
@@ -310,6 +320,26 @@ const addToRequest = async() => {
           </div>
 
         <div className='addChild'>
+        <h1>Add Child </h1>
+        <Link to='/addchild'>
+          <img className= 'add' src={Add} />
+          </Link>
+          <img
+          className='notifs-icon'
+          src={notifs}
+          onClick={() => {
+            fetchRequests()
+          }}></img>
+          <div className='requests'>
+            {request.map((item) => (
+
+              <div className='request-list' key={item.id}>
+                <h3> {item.email}</h3>
+                <h3>Amount Requested: {item.amt}</h3>
+
+              </div>
+            ))}
+          </div>
         {(isChild.toString()==="false")&&
          <>
            <h1>Add Child </h1>

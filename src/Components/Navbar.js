@@ -58,9 +58,12 @@ function NavBar() {
             <div className='link'>
             <Link className="links" to={`/transactions/${isChild}`}>Transactions</Link>
             </div>
-            <div className='link'>
-            <Link className="links" to="/expenditure">Expenditure</Link>
-            </div>
+            {(isChild)&&<div className='link'>
+            <Link className="links " to="/expenditure">Expenditure</Link>
+            </div>}
+            {(!isChild)&&<div className='link'>
+            <Link className="links" to="/restrictions">Restrictions</Link>
+            </div>}
             <div className="profile">
                 <Link className='profileLink' to={`/details/${isChild}`}><img
                 className="profile-logo"
