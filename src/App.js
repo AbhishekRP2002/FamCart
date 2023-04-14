@@ -25,7 +25,7 @@ function App() {
         <Switch>
         <Route path="/login" element={<Login />}/>
         <Route path="/transactions/:isChild" element={<><Navbar/><Transactions/></>}/>
-        <Route path="/restrictions" element={<><Navbar/><Restrictions/></>}/>
+        <Route path="/restrictions/:isChild/:childEmail" element={<><Navbar/><Restrictions/></>}/>
         <Route path="/details/:isChild" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
 
