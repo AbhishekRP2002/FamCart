@@ -1,6 +1,6 @@
 import React,{ useState, useEffect, useContext} from 'react';
 import {Button, Container, Modal} from 'react-bootstrap';
-//you need to also add bootstrap link in the ap.js page or here
+//you need to also add bootstrap link in the app.js page or here
 //modal sis the cart popup
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from '../CartContext.js';
@@ -51,14 +51,16 @@ function NavBar() {
             ></img></Link>
             
             <div className='nav-right'>
+            {!(isChild) ?<div className='link'>
+            </div>:<div className='link'>
+            <Link className="links" to={`/restrictions/${isChild}/${auth.currentUser.email}`}>Shop</Link>
+            </div>}
             <div className='link'>
             <Link className="links" to={`/transactions/${isChild}`}>Transactions</Link>
             </div>
-            {!(isChild) ?<div className='link'>
-            <Link className="links" to="/restrictions">Restrictions</Link>
-            </div>:<div className='link'>
+            <div className='link'>
             <Link className="links" to="/expenditure">Expenditure</Link>
-            </div>}
+            </div>
             <div className="profile">
                 <Link className='profileLink' to={`/details/${isChild}`}><img
                 className="profile-logo"
@@ -80,7 +82,8 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='navBtn'/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Link to="/home">Home</Link>
+          <Link to="/home">Home</Link> 
+          {/* Edit this part too */}
             <Link to={`/transactions/${isChild}`}>Transactions</Link>
             <Link to="/restrictions">Restrictions</Link>
             <Link to={`/details/${isChild}`}>Profile</Link>

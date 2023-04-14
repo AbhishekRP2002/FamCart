@@ -22,6 +22,7 @@
     margin: 10px;
     font: 1.5rem;
     font-weight: 500;
+
 }
 
 .Rbtns {
@@ -54,6 +55,21 @@
     display: flex;
   }
 
+  .inputbox {
+    border: none;
+    margin: auto;
+    width: 2rem;
+    height: 1.15rem;
+    font-size: 1rem;
+    background-color: grey;
+    color: white;
+    margin: 5px;
+   }
+  
+   .noBtn {
+     border: none;
+     color:white;
+   }
 
        
  @media screen and (max-width: 750px) {

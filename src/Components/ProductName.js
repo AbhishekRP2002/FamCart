@@ -20,9 +20,11 @@ function ProductName({ id,nameIsOne,quantity }) {
 
   return (
     <div>
-      {nameIsOne==="1"
-      ?<h1 className='trans_info'>{name}</h1>
-      :<h1 className='trans_info'>{price*quantity}</h1>
+      {(nameIsOne==="1")
+      &&<h1 className='trans_info'>{name}</h1>
+      }
+      {(nameIsOne==="0")
+      &&<h1 className='trans_info'>{price*quantity}</h1>
       }
     </div>
   );
@@ -42,6 +44,7 @@ const getProductNames = async (id) => {
 };
 
 const getProductPrice = async (id) => {
+  
   const docu = doc(db, 'products', id.toString());
   const docuSnap = await getDoc(docu);
 
@@ -52,6 +55,7 @@ const getProductPrice = async (id) => {
     console.log('No matching documents.');
     return null;
   }
+
 };
 
 export default ProductName;

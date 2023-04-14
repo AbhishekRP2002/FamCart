@@ -21,6 +21,7 @@ const [mail, setMail] = useState("");
 const [name, setName] = useState("");
 const [money, setMoney] = useState(0);
 const [date, setDate] = useState([]);
+const [rQuantity, setRQuantity] = useState([]);
 var [ritems, setRItems] = useState([]);
 const [amtToPay, setAmtToPay] = useState(0);
 const [greeting, setGreeting] = useState('');
@@ -48,7 +49,7 @@ const openChildDetails = async (email) => {
       setMoney(data.balance)
       console.log(money)
     } else {
-      console.log('Nopee');
+      console.log('No child found.');
     }
 }
 
@@ -95,6 +96,7 @@ const showRestricted = async (email) => {
         const data = docSnap.data();
           const id = data.product_id;
           console.log("hiii"+id);
+          setRQuantity(data.quantity)
           splitID(id);
       } else {
         console.log('No matching documents.');
@@ -242,9 +244,9 @@ const addToRequest = async() => {
                       </div>
                       < div className='forSpace restrictedPart'>
                       <h2 className='info'>{(isChild.toString()==="false")&&
-                      <Link className='' to="/restrictions"><img className= 'add' src={Add} /></Link>}
-                      Restricted items:</h2><h2 className='info'> {ritems?.map((item,idx) => (
-                      <span key={idx}  className='info'>{item} </span>
+                      <Link className='' to={`/restrictions/${isChild}/${child.child_email}`}><img className= 'add' src={Add} /></Link>}
+                      Restricted(quantity):</h2><h2 className='info'> {ritems?.map((item,idx) => (
+                      <span key={idx}  className='info'>{item}({rQuantity[idx]}) </span>
                     ))}</h2>
                     </div>
                     <div>
