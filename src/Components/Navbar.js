@@ -1,10 +1,7 @@
 import React,{ useState, useEffect, useContext} from 'react';
 import {Button, Container, Modal} from 'react-bootstrap';
 //you need to also add bootstrap link in the app.js page or here
-//modal sis the cart popup
 import { Link, useNavigate } from "react-router-dom";
-import { CartContext } from '../CartContext.js';
-import CartProduct from './CartProduct.js';
 import { doc, getDoc,getDocs,collection,where,query} from "firebase/firestore"; 
 import { db, auth } from '../firebase.js';
 import "./Css/Navbar.css"
@@ -17,9 +14,7 @@ function NavBar() {
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [isChild, setIsChild] = useState(false);
-    
-    //const cartCount = cart.items.reduce((sum,itemamt) => sum + itemamt.quantity, 0);
-    
+
     useEffect(() => {
       const checkChild = async () => {
         const docRef = doc(db, "children", auth.currentUser.uid);
@@ -44,27 +39,24 @@ function NavBar() {
   return (
     <>
     <div className="nav-bar">
-            <Link className='logoimg' to="/details"><img 
+            <Link className='logoimg' to={`/details/${isChild}`}><img 
             className="main-logo"
             src={Logo}
             alt="logo"
             ></img></Link>
             
             <div className='nav-right'>
-            {!(isChild) ?<div className='link'>
+            {!(isChild) ?<div>
             </div>:<div className='link'>
-            <Link className="links" to={`/restrictions/${isChild}/${auth.currentUser.email}`}>Shop</Link>
+            <Link className="links link1" to={`/restrictions/${isChild}/${auth.currentUser.email}`}>Shop</Link>
             </div>}
             <div className='link'>
-            <Link className="links" to={`/transactions/${isChild}`}>Transactions</Link>
+            <Link className="links link2" to={`/transactions/${isChild}`}>Transactions</Link>
             </div>
-            {(isChild)&&<div className='link'>
+            {/* {(isChild)&&<div className='link'>
             <Link className="links " to="/expenditure">Expenditure</Link>
-            </div>}
-            {(!isChild)&&<div className='link'>
-            <Link className="links" to="/restrictions">Restrictions</Link>
-            </div>}
-            <div className="profile">
+            </div>} */}
+            <div className="profile link3">
                 <Link className='profileLink' to={`/details/${isChild}`}><img
                 className="profile-logo"
                 src={Profile}
@@ -84,12 +76,12 @@ function NavBar() {
             ></img></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='navBtn'/>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-          <Link to="/home">Home</Link> 
-          {/* Edit this part too */}
-            <Link to={`/transactions/${isChild}`}>Transactions</Link>
-            <Link to="/restrictions">Restrictions</Link>
-            <Link to={`/details/${isChild}`}>Profile</Link>
+          <Nav className="me-auto phone-links">
+              {(isChild) &&<div>
+            <Link className="phone-link" to={`/restrictions/${isChild}/${auth.currentUser.email}`}>Shop</Link>
+              </div>}
+            <Link className="phone-link" to={`/transactions/${isChild}`}>Transactions</Link>
+            <Link className="phone-link" to={`/details/${isChild}`}>Profile</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

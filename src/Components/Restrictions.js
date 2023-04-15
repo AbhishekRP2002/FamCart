@@ -17,24 +17,26 @@ function Restrictions() {
   const { isChild, childEmail } = useParams();
   const [insufficientBalance, setInsufficientBalance] = useState(false);
   const [balance, setBalance] = useState(0);
-  const [showAlert,setShowAlert] = useState(false)
+  const [showAlert, setShowAlert] = useState(false);
+  const [notAllowed, setNotAllowed] = useState(false);
 
   const addRestrictions = async (id) => {
     const docu = doc(db, 'restrictions', childEmail);
     const docuSnap = await getDoc(docu);
     const data = docuSnap.data();
-    console.log("quantity and pr id are" + quantity+" "+ id)
-    const q = data.quantity
-    console.log(q)
+    console.log("quantity and pr id are" + quantity+" "+ id);
+    const q = data.quantity;
+    console.log(q);
     q.push(parseInt(quantity,10));
-    console.log("new"+q)
+    console.log("new"+q);
     if (data.product_id.includes(id)) {
-      setRestrictionExists(true)
+      setRestrictionExists(true);
     } else {
-      setNewRestriction(true)
+      setNewRestriction(true);
       await updateDoc(docu, {
         product_id: arrayUnion(id),
-        quantity: q
+        quantity: q,
+        bought: arrayUnion(0)
       });
     }
     }
@@ -80,6 +82,46 @@ function Restrictions() {
   }
 
     const addToDB = async (i) => {
+
+      
+    const docu = doc(db, 'restrictions', auth.currentUser.email);
+    const docuSnap = await getDoc(docu);
+    const data = docuSnap.data();
+    let arr = data.bought;
+    let matchingIndex=-1;
+    console.log("array before = "+arr)
+    if (data.product_id.includes(i)) {
+      console.log(data.product_id)
+      matchingIndex = data.product_id.indexOf(i);
+    }
+    console.log("matching index is "+matchingIndex)
+    let x=parseInt(matchingIndex,10);
+    let allowed=data.quantity[x]
+    arr[x]=arr[x]+parseInt(quantity,10);
+    console.log("arr after adding quantity bought "+arr[x])
+    console.log("the quantity of xth element "+allowed)
+    if(x===-1)
+    {
+      setChangeBalance(true)
+      toDecreaseBalance(i)
+      let now = Date.now()+auth.currentUser.email;
+      const date = new Date();
+      await setDoc(doc(db, "transactions", now), {
+        parent_id: parent_id,
+        date: date,
+        child_email: auth.currentUser.email,
+        product_id:i,
+        quantity: quantity
+      });
+    }
+    if(arr[x]>parseInt(data.quantity[x],10))
+    {
+      setNotAllowed(true)
+    }
+    else{
+    await updateDoc(docu, {
+      bought: arr
+    });
     setChangeBalance(true)
     toDecreaseBalance(i)
     let now = Date.now()+auth.currentUser.email;
@@ -91,6 +133,7 @@ function Restrictions() {
       product_id:i,
       quantity: quantity
     });
+    }
   }
 
   const showProducts = () => {
@@ -105,11 +148,12 @@ function Restrictions() {
             </div>
             <h3 className='dataTitle'>{data[i].title}</h3>
             <div className='quantityAdd'>
-            <h4>Quantity</h4>
+            <h4 className='quantity'>Quantity</h4>
             <input className='inputbox' onChange={(e) => setQuantity(e.target.value)} type="number"/>
             <button className="noBtn" onClick={()=>{
               if(isChild.toString()==="true")
               {
+
                 addToDB(data[i].id)
               }
               else {
@@ -141,6 +185,21 @@ function Restrictions() {
   }
 
   useEffect(() => {
+
+    const intervalId = setInterval(async() => {
+      
+    const docu = doc(db, 'restrictions', auth.currentUser.email);
+    const docuSnap = await getDoc(docu);
+    const data = docuSnap.data();
+    let arr = data.bought;
+    arr.map((item) => {
+      item=0;
+    })
+    await updateDoc(docu, {
+      bought: arr
+    });
+
+    }, 7 * 24 * 60 * 60 * 1000); 
       
     if(isChild.toString()==="true")
     {
@@ -165,10 +224,6 @@ function Restrictions() {
             }
     }
     balancePart()
-    }
-    else
-    {
-       
     }
     showProducts();
   },[]);
@@ -217,6 +272,12 @@ function Restrictions() {
           <>
           <Alert variant="success" onClose={() => setNewRestriction(false)} dismissible>
           <Alert.Heading>Product restriction added</Alert.Heading>
+        </Alert>
+          </>}
+          {(notAllowed)&&
+          <>
+          <Alert variant="danger" onClose={() => setNotAllowed(false)} dismissible>
+          <Alert.Heading>Weekly allowed limit exceeded</Alert.Heading>
         </Alert>
           </>}
         <div className='AllProducts'>

@@ -15,7 +15,6 @@ import { useParams } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 
 function ParentHome() {
-const [request,setRequests]= useState([]);
 
 const { isChild } = useParams();
 const [children, setChildren] = useState([]);
@@ -34,10 +33,11 @@ const [showStripe,setShowStripe] = useState(false);
 const [showAmt, setShowAmt] = useState(false);
 const [requestPlaced, setRequestPlaced] = useState(false);
 const [isLoaded,setIsLoaded] = useState(false);
-
+const [requests,setRequests]= useState([]);
+const [openRequests, setOpenRequests] = useState(false);
+const [showAmtReq, setShowAmtReq] = useState(false);
 const PUBLIC_KEY = "pk_test_51L53qSSJjdtRfZfqeUz2kHr28deqaXpP543D5Sj7M9ePyjE4A10csiK44F6Tx33iv7IB8W5PA8OpgKIXjcRm82xT002KPdgFvn"
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
-
 const openChildDetails = async (email) => {
   setShowChild(false)
   ritems = [];
@@ -120,6 +120,31 @@ const addToRequest = async() => {
   });
 }
 
+const fetchRequests = async () => {
+  children?.map(async(child) => {
+    if(openRequests===false)
+    {
+      var docRef = doc(db, "requests", child.child_email);
+      const docSnap = await getDoc(docRef);
+      
+          if (docSnap.exists()) {
+            const querySnapshot = await getDocs(collection(db, 'requests'));
+            const docs= querySnapshot.docs.map((doc) => ({id: doc .id, ...doc.data()}));
+            setRequests(docs);
+            setOpenRequests(true);
+          } else {
+            console.log('No matching documents.');
+          }
+    }
+    else 
+    {
+      setOpenRequests(false);
+      setRequests([]);
+    }
+  })
+
+};
+
   useEffect(() => {
     
     
@@ -172,12 +197,6 @@ const addToRequest = async() => {
     viewChildren();
     setIsLoaded(true)
     }, []);
-
-    const fetchRequests = async () => {
-      const querySnapshot = await getDocs(collection(db, 'requests'));
-      const docs= querySnapshot.docs.map((doc) => ({id: doc .id, ...doc.data()}));
-      setRequests(docs);
-    };
 
   if(isLoaded===false)
   {
@@ -322,24 +341,33 @@ const addToRequest = async() => {
         <div className='addChild'>
         {(isChild.toString()==="false")&&
          <>
-           <h1>Add Child </h1>
+         <div className='row-right'>
+            <h1>Add Child</h1>
             <Link to='/addchild'>
               <img className= 'add' src={Add} />
             </Link>
-          <img
-          className='notifs-icon'
-          src={notifs}
-          onClick={() => {
-            fetchRequests()
-          }}></img>
+          </div>
+          <div className='row-right'>
+            <h1>Requests</h1>
+            <img
+            className='notifs-icon'
+            src={notifs}
+            onClick={() => {
+              fetchRequests()
+            }}></img>
+          </div>
+
           <div className='requests'>
-            {request.map((item) => (
-
-              <div className='request-list' key={item.id}>
-                <h3> {item.email}</h3>
-                <h3>Amount Requested: {item.amt}</h3>
-
-              </div>
+            {requests.map((request) => (
+                <Button variant="none"
+                className='request-list' key={request.id}
+                >
+                  <div className='list-row'>
+                    <h3 className='requestLines'>Message from: </h3>
+                    <h3 className='requestLines'> {request.email}</h3>
+                  </div>
+                  < div className='amt'>Amount requested: {request.amt}</div>
+              </Button>
             ))}
           </div>
           </>

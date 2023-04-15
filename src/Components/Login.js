@@ -62,7 +62,7 @@ function Login({setIsChild}) {
       .then((userCredential) => {
         const uid = userCredential.user.uid;
         if(child===true)
-        navigate("/")
+        navigate("/details/true")
         else if(parent===true)
         navigate("/details/false")
       })
@@ -81,12 +81,12 @@ function Login({setIsChild}) {
         if(child===true)
         {
           saveChildData(uid);
-          navigate("/");
+          navigate("/details/true");
         }
         else if(parent===true)
         {
           saveParentData(uid);
-          navigate("/")
+          navigate("/details/false")
         }
         })
       .catch((error) => {
