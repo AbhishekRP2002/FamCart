@@ -1,12 +1,10 @@
 @media screen and (min-width: 750px) {
   
-  .container {
-      position: absolute;
-      margin:0;
-      width:100vw;
-      padding:0;
-  }
-   
+
+.phoneNavBar {
+  display: none;
+}
+
 .nav-bar {
    position: relative;
    width: 100vw;
@@ -34,15 +32,28 @@
   justify-content: space-between;
 }
 
-
-
 .links
 {
    position: absolute;
    height: 2.5rem;
    text-decoration:none;
    color: #FFFFFF;
-   
+   margin: auto;
+   display: flex;
+   justify-content: center;
+}
+
+.link1 {
+  width: 30%;
+}
+
+.link2 {
+  width: 30%;
+  margin: auto;
+}
+
+.link3 {
+  width: 40%;
 }
 
  
@@ -59,16 +70,23 @@
 .profile-logo {
    width: 1.75rem;
    height: 1.75rem;
-   margin: 0 auto;
-}
-
-.hello-user {
-   color: #FFFFFF;
-   margin: auto;
-   height: 2.5rem;
+   margin: 0 9px 0 auto;
+   margin-right: 9px;
 }
 
  }
+
+@media screen and (min-width: 950px) {
+  .nav-right {
+    width: 40vw;
+  }
+}
+
+@media screen and (max-width: 949px) and (min-width:751px) {
+  .nav-right {
+    width: 50vw;
+  }
+}
 
  @media screen and (max-width: 750px) {
       .nav-bar {
@@ -76,7 +94,7 @@
       }
 
       .phoneNavBar {
-         background-color: #144273;
+        background: #144273;
          position: relative;
        }
 
@@ -96,50 +114,22 @@
        *{
         overflow-x: hidden;
        }
+
+       .phone-link {
+        color: #FFFFFF;
+        text-decoration: none;
+       }
+
+       .phone-link:active {
+        color: #FFFFFF;
+        text-decoration: none;
+       }
+
+       .navBtn, .navBtn:active {
+        color: #144273;
+       }
+       
       } 
-
-
-      @media screen and (min-width: 1280px) {
-        .nav-right {
-           width: 40vw;
-         }
-
-         .profile-logo {
-          margin-right: 9px;
-         }
-         .phoneNavBar {
-           display: none;
-         }
-      }
-
-
- @media screen and (max-width: 1279px) and(min-width: 1180px) {
-   .nav-right {
-      width: 70vw;
-    }
-    .phoneNavBar {
-      display: none;
-    }
- }
-
-
- @media screen and (max-width: 1179px) and (min-width: 920px) {
-   .nav-right {
-      width: 60vw;
-    }
-    .phoneNavBar {
-      display: none;
-    }
- }
-
- @media screen and (max-width: 919px) and (min-width: 750px) {
-  .nav-right {
-     width: 70vw;
-   }
-   .phoneNavBar {
-     display: none;
-   }
-}
 
 .profileLink {
   text-decoration: none;

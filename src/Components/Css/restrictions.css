@@ -50,6 +50,12 @@
     background-color: #144273;
     border-style: none;
 }
+
+.AllProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   .product-row {
     display: flex;
@@ -58,18 +64,30 @@
   .inputbox {
     border: none;
     margin: auto;
-    width: 2rem;
+    width: 3rem;
     height: 1.15rem;
     font-size: 1rem;
-    background-color: grey;
+    background-color: rgb(199, 199, 199);
     color: white;
     margin: 5px;
    }
-  
-   .noBtn {
-     border: none;
-     color:white;
-   }
+
+   
+.noBtn {
+  background-color: white;
+  border-style: none;
+  margin: 0;
+  margin-bottom: 3px;
+  padding: 0;
+}
+
+.Rproduct, .AllProducts, .productPart {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: auto;
+}
 
        
  @media screen and (max-width: 750px) {
@@ -83,20 +101,13 @@
     align-items: center;
   }
 
-  .Rproduct {
-    right: 30px;
-    justify-content: center;
-    display: flex;
-  flex-wrap: wrap;
-  }
-
   .rproduct {
     margin: auto;
-    padding: 5px;
+    padding: 3px;
     margin: 10px;
     background-color: white;
-    height: 9rem;
-    width: 9rem;
+    height: 10rem;
+    width: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,7 +119,7 @@
 
   
   .image-wrapper {
-    width: 6rem;
+    width: 7rem;
     height: 4rem;
     overflow: hidden;
   }
@@ -123,6 +134,12 @@
     margin-top: 5px;
     font-size: 1rem;
     font-weight: 500;
+    overflow-y: hidden;
+  }
+
+  .quantity {
+    font-size: 0.1rem;
+    overflow-y: hidden;
   }
 
   .quantityAdd {
@@ -167,15 +184,22 @@
     right: 0;
     background-color: #F8F4E9;
     margin: auto;
-    margin: auto;
-    justify-content: left;
-    align-items: left;
+}
+
+.AllProducts {
+  width: 99%;
+  margin: auto;
+}
+
+.Rproduct {
+  width: 99%;
+  margin: auto;
 }
 
 .rproduct {
-  margin: auto;
-  padding: 10px;
   margin: 20px;
+  padding: 10px;
+  border-width: 10px;
   background-color: white;
   height: 15rem;
   width: 15rem;
