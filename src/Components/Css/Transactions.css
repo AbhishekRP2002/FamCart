@@ -17,14 +17,14 @@
     border-radius: 5px;
 }
 
-.col {
+.transaction .col {
     display: flex;
     flex-direction: column;
     border-color: #000000;
     border-width: 1px;
 }
 
-.row {
+.transaction .row {
     margin: auto;
 }
 

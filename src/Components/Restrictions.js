@@ -83,7 +83,7 @@ function Restrictions() {
 
     const addToDB = async (i) => {
 
-      
+    
     const docu = doc(db, 'restrictions', auth.currentUser.email);
     const docuSnap = await getDoc(docu);
     const data = docuSnap.data();
@@ -187,7 +187,7 @@ function Restrictions() {
   useEffect(() => {
 
     const intervalId = setInterval(async() => {
-      
+
     const docu = doc(db, 'restrictions', auth.currentUser.email);
     const docuSnap = await getDoc(docu);
     const data = docuSnap.data();

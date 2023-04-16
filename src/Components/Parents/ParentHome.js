@@ -276,6 +276,7 @@ const fetchRequests = async () => {
                       <Link className='' to={`/restrictions/${isChild}/${child.child_email}`}><img className= 'add' src={Add} /></Link>}
                       Restricted(quantity):</h2><h2 className='info'> {ritems?.map((item,idx) => (
                       <span key={idx}  className='info'>{item}({rQuantity[idx]}) </span>
+                      
                     ))}</h2>
                     </div>
                     <div>
@@ -327,6 +328,11 @@ const fetchRequests = async () => {
                         }
                     </>
                     }   
+<Button variant="outlined" color="secondary" className='amtBtn'>
+<div>
+            <Link className="no_design_link" to={`/expenditure/${child.child_email}`}>Graph</Link>
+
+            </div></Button>
                     </div>
                     </div>
                     }
