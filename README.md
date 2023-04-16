@@ -29,3 +29,6 @@ npm start
 
 **Link to FamCart AI Chatbot :** 
 [FamCart-AI-Chatbot](https://github.com/AbhishekRP2002/FamCart-AI-Chatbot)
+
+**Figma Link to UI of FamCart :** 
+[FamCart-UI](https://www.figma.com/file/XrmXeMnmdaPu5B8Ad9lqSH/E-commerce-web-site-(Community)?node-id=179-12&t=SJAJMSXRJrDocWHw-0)
