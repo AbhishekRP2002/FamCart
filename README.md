@@ -27,7 +27,7 @@ npm install
 npm start
 ```
 
-**Our test credentials are :** 
+## Our test credentials are :
 (parent side)
 parent email:parentc@gmail.com
 parent password:123456
