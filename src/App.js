@@ -9,7 +9,6 @@ import AddChild from './Components/Parents/AddChild.js';
 import Transactions from './Components/Transactions.js';
 import Restrictions from './Components/Restrictions.js';
 import Expenditure from './Components/Expenditure.js';
-import Graph from './Components/Graph.js';
 
 function App() {
 
@@ -20,12 +19,11 @@ function App() {
       
       <div className="app">
         <Switch>
-        <Route path="/graph" element={<Graph />}/>
         <Route path="/transactions/:isChild" element={<><Navbar/><Transactions/></>}/>
         <Route path="/restrictions/:isChild/:childEmail" element={<><Navbar/><Restrictions/></>}/>
         <Route path="/details/:isChild" element={<><Navbar /><ParentHome/></>}/>
         <Route path="/addchild" element={<><Navbar /><AddChild /></>}/>
-        <Route path='/expenditure' element ={<><Navbar/><Graph/></>}/>
+        <Route path='/expenditure/:childEmail' element ={<><Navbar/><Expenditure/></>}/>
         <Route path="/" element={<Login />}/>
         </Switch>
       </div>

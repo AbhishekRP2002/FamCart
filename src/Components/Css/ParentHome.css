@@ -116,6 +116,15 @@
     margin: 20px 30px;
 }
 
+.no_design_link {
+    text-decoration: none;
+    color: black;
+}
+
+.no_design_link:hover {
+    color: rgb(87, 87, 87);
+}
+
 .header {
     display: flex;
     padding: 80px 0 20px 0;

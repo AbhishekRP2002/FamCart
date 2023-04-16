@@ -1,57 +1,16 @@
-.container {
-    width: 100vw;
+.graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
 }
 
-.expenditurePage {
-    background-color: #F8F4E9;
-    position: relative;
-    width: 100vh;
+.graph h1 {
+    margin-bottom: 3rem;
 }
 
-.expAnalysis {
-    
-    display:flex;
-    justify-content:space-between;
-    padding: 10px;
-    
-    margin: 40px;
-    color: black;
-    font-family: 'Montserrat';
-    font-weight: 800;
-    font-size: 40px;
+.barchart {
+    max-width: 60vw;
+    height: 50vh;
 }
-.pastMonth {
-   
-    height:2rem;
-   padding:1px;
-    margin: 17px 5px;
-    width: 15rem;
-
-    float:right;
-    
-    font-size:20px;
-    border: 3px solid #144273;
-    border-radius: 5px;
-    
-}
-
-.selectChild {
-    padding: 3px;
-    margin-left : 60px;
-    width:12rem;
-
-    font-family: 'Montserrat';
-    font-weight: 700;
-    font-size: 20px;
-    color: #144273;
-
-    border:none;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
-.arrowImg {
-    padding: 5px 10px;
-    
-}
-
