@@ -27,6 +27,19 @@ npm install
 npm start
 ```
 
+**Our test credentials are :** 
+(parent side)
+parent email:parentc@gmail.com
+parent password:123456
+
+(child 1)
+child email:childc1@gmail.com
+child password:123456
+
+(child 2)
+child email:childc2@gmail.com
+child password:123456
+
 **Link to FamCart AI Chatbot :** 
 [FamCart-AI-Chatbot](https://github.com/AbhishekRP2002/FamCart-AI-Chatbot)
 
